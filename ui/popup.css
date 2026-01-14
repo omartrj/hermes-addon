@@ -163,7 +163,8 @@ button.secondary:hover {
 .tab-content {
   padding: 14px;
   background: #1a1a1a;
-  min-height: 420px;
+  height: 420px;
+  overflow-y: auto;
 }
 
 .tab-content.hidden {
