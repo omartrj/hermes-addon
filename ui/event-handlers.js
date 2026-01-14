@@ -12,8 +12,10 @@ async function initialize() {
   
   if (!encryptedVault) {
     UI.showCreateVaultView();
+    document.getElementById('new-master-password').focus();
   } else {
     UI.showUnlockVaultView();
+    document.getElementById('unlock-password').focus();
   }
   
   setupEventListeners();
