@@ -35,8 +35,16 @@
 
     <div id="profiles-tab" class="tab-content active">
       <h3>Your Public Key</h3>
-      <textarea id="my-public-key" readonly></textarea>
-      <button id="copy-public-key-btn">Copy</button>
+      <div class="key-display-wrapper">
+        <button id="copy-public-key-btn" class="key-display-btn">
+          <span id="key-display"></span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2Z"/>
+            <path d="M2 6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1H6a3 3 0 0 1-3-3V6H2Z"/>
+          </svg>
+        </button>
+      </div>
+      <div id="copy-toast" class="toast">Copied!</div>
 
       <h3>Add New Profile</h3>
       <input type="text" id="profile-name" placeholder="Profile Name" />

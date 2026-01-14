@@ -145,14 +145,14 @@ function loadMainScreen() {
 }
 
 async function handleCopyPublicKey() {
-  const publicKey = UI.getInputValue('my-public-key');
+  const display = document.getElementById('key-display');
+  const publicKey = display.dataset.fullKey;
   await UI.copyToClipboard(publicKey);
   
-  const btn = document.getElementById('copy-public-key-btn');
-  const originalText = btn.textContent;
-  btn.textContent = 'Copied!';
+  const toast = document.getElementById('copy-toast');
+  toast.classList.add('show');
   setTimeout(() => {
-    btn.textContent = originalText;
+    toast.classList.remove('show');
   }, 2000);
 }
 

@@ -45,7 +45,11 @@ export function switchTab(tabName) {
 }
 
 export function setMyPublicKey(publicKey) {
-  document.getElementById('my-public-key').value = publicKey;
+  const display = document.getElementById('key-display');
+  const cleanKey = publicKey.replace(/=+$/, '');
+  const abbreviated = cleanKey.slice(0, 5).toUpperCase() + '...' + cleanKey.slice(-5).toUpperCase();
+  display.textContent = abbreviated;
+  display.dataset.fullKey = publicKey;
 }
 
 export function renderProfilesList(profiles) {
