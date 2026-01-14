@@ -8,6 +8,10 @@
     "clipboardWrite",
     "clipboardRead"
   ],
+  "options_ui": {
+    "page": "ui/options.html",
+    "open_in_tab": true
+  },
   "action": {
     "default_popup": "ui/popup.html",
     "default_icon": {

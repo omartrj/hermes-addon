@@ -13,11 +13,25 @@ async function initialize() {
   if (!encryptedVault) {
     UI.showCreateVaultView();
     document.getElementById('new-master-password').focus();
-  } else {
-    UI.showUnlockVaultView();
-    document.getElementById('unlock-password').focus();
+    setupEventListeners();
+    return;
   }
   
+  const settings = await getFromStorage('settings');
+  const authMode = settings?.authMode || 'always';
+  
+  if (authMode === 'session') {
+    const sessionVault = await getFromStorage('sessionVault');
+    if (sessionVault) {
+      currentVault = sessionVault;
+      loadMainScreen();
+      setupEventListeners();
+      return;
+    }
+  }
+  
+  UI.showUnlockVaultView();
+  document.getElementById('unlock-password').focus();
   setupEventListeners();
 }
 
@@ -98,6 +112,14 @@ async function handleUnlockVault() {
   try {
     const encryptedVault = await getFromStorage('vault');
     currentVault = await decryptVault(password, encryptedVault);
+    
+    const settings = await getFromStorage('settings');
+    const authMode = settings?.authMode || 'always';
+    
+    if (authMode === 'session') {
+      await setInStorage('sessionVault', currentVault);
+    }
+    
     loadMainScreen();
   } catch (error) {
     UI.showError('unlock-error', 'Incorrect password');
@@ -260,6 +282,13 @@ async function saveVault() {
   const password = UI.getInputValue('unlock-password');
   const encryptedVault = await encryptVault(password, currentVault);
   await setInStorage('vault', encryptedVault);
+  
+  const settings = await getFromStorage('settings');
+  const authMode = settings?.authMode || 'always';
+  
+  if (authMode === 'session') {
+    await setInStorage('sessionVault', currentVault);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', initialize);
