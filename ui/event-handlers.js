@@ -201,10 +201,26 @@ async function handleEncrypt() {
     const wrapped = wrapEncryptedMessage(encrypted);
     
     UI.setInputValue('encrypted-output', wrapped);
-    await UI.copyToClipboard(wrapped);
   } catch (error) {
     UI.showError('encrypt-error', 'Encryption failed');
   }
+}
+
+async function handleCopyEncrypted() {
+  const encryptedText = UI.getInputValue('encrypted-output');
+  
+  if (!encryptedText) {
+    return;
+  }
+  
+  await UI.copyToClipboard(encryptedText);
+  
+  const btn = document.getElementById('copy-encrypted-btn');
+  const originalText = btn.textContent;
+  btn.textContent = 'Copied!';
+  setTimeout(() => {
+    btn.textContent = originalText;
+  }, 2000);
 }
 
 async function handleDecrypt() {

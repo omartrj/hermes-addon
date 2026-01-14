@@ -5,7 +5,8 @@
   "description": "End-to-end encryption for messaging platforms",
   "permissions": [
     "storage",
-    "clipboardWrite"
+    "clipboardWrite",
+    "clipboardRead"
   ],
   "action": {
     "default_popup": "ui/popup.html",
