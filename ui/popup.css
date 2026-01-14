@@ -5,17 +5,17 @@
 }
 
 body {
-  width: 450px;
-  min-height: 500px;
+  width: 420px;
+  min-height: 480px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #f5f5f5;
-  color: #333;
+  background: #0a0a0a;
+  color: #e5e5e5;
 }
 
 .auth-container {
-  padding: 40px 30px;
-  background: white;
-  min-height: 500px;
+  padding: 24px 20px;
+  background: #1a1a1a;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,22 +23,27 @@ body {
 
 h1 {
   text-align: center;
-  color: #2563eb;
-  margin-bottom: 30px;
-  font-size: 32px;
+  color: #3b82f6;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #555;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #a3a3a3;
 }
 
 h3 {
-  margin: 20px 0 10px 0;
-  font-size: 16px;
-  color: #555;
+  margin: 12px 0 6px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #a3a3a3;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 input[type="text"],
@@ -46,37 +51,46 @@ input[type="password"],
 textarea,
 select {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border: 1px solid #2a2a2a;
+  border-radius: 2px;
   font-family: inherit;
   font-size: 14px;
+  background: #0f0f0f;
+  color: #e5e5e5;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
 }
 
 textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 70px;
   font-family: 'Courier New', monospace;
   font-size: 12px;
 }
 
 button {
   width: 100%;
-  padding: 12px;
-  background: #2563eb;
-  color: white;
+  padding: 8px;
+  background: #3b82f6;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  margin-bottom: 10px;
-  transition: background 0.2s;
+  margin-bottom: 8px;
+  transition: background 0.15s;
 }
 
 button:hover {
-  background: #1d4ed8;
+  background: #2563eb;
 }
 
 button.danger {
@@ -88,18 +102,18 @@ button.danger:hover {
 }
 
 button.secondary {
-  background: #64748b;
+  background: #404040;
 }
 
 button.secondary:hover {
-  background: #475569;
+  background: #525252;
 }
 
 .error {
-  color: #dc2626;
+  color: #ef4444;
   font-size: 13px;
-  margin-top: 5px;
-  min-height: 18px;
+  margin-top: 4px;
+  min-height: 16px;
 }
 
 .hidden {
@@ -108,39 +122,40 @@ button.secondary:hover {
 
 .tabs {
   display: flex;
-  background: white;
-  border-bottom: 2px solid #e5e7eb;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
 }
 
 .tab-btn {
   flex: 1;
-  padding: 15px;
+  padding: 10px;
   background: transparent;
-  color: #64748b;
+  color: #737373;
   border: none;
-  border-bottom: 3px solid transparent;
-  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  font-weight: 400;
+  font-size: 14px;
   margin-bottom: 0;
   border-radius: 0;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .tab-btn:hover {
-  background: #f8fafc;
-  color: #334155;
+  background: #0f0f0f;
+  color: #a3a3a3;
 }
 
 .tab-btn.active {
-  color: #2563eb;
-  border-bottom-color: #2563eb;
-  background: white;
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+  background: #1a1a1a;
 }
 
 .tab-content {
-  padding: 20px;
-  background: white;
-  min-height: 450px;
+  padding: 14px;
+  background: #1a1a1a;
+  min-height: 420px;
 }
 
 .tab-content.hidden {
@@ -148,52 +163,54 @@ button.secondary:hover {
 }
 
 #profiles-list {
-  max-height: 200px;
+  max-height: 180px;
   overflow-y: auto;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  padding: 10px;
+  border: 1px solid #2a2a2a;
+  border-radius: 2px;
+  padding: 6px;
 }
 
 .profile-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background: #f8fafc;
-  border-radius: 4px;
-  margin-bottom: 8px;
+  padding: 8px;
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 2px;
+  margin-bottom: 6px;
 }
 
 .profile-item span {
-  font-weight: 500;
-  color: #334155;
+  font-weight: 400;
+  font-size: 14px;
+  color: #e5e5e5;
 }
 
 .profile-item button {
   width: auto;
-  padding: 6px 12px;
+  padding: 4px 10px;
   margin: 0;
   font-size: 12px;
 }
 
 label {
   display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: 400;
   font-size: 14px;
-  color: #475569;
+  color: #a3a3a3;
 }
 
 #my-public-key {
-  min-height: 100px;
-  background: #f8fafc;
+  min-height: 80px;
+  background: #0f0f0f;
 }
 
 #copy-public-key-btn {
   background: #059669;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 #copy-public-key-btn:hover {
@@ -206,29 +223,30 @@ label {
 
 .paste-btn {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 4px;
+  right: 4px;
   width: auto;
-  padding: 6px 12px;
+  padding: 4px 10px;
   margin: 0;
   font-size: 12px;
-  background: #64748b;
+  background: #404040;
 }
 
 .paste-btn:hover {
-  background: #475569;
+  background: #525252;
 }
 
 #encrypted-output,
 #decrypted-output {
-  min-height: 120px;
-  background: #f8fafc;
+  min-height: 100px;
+  background: #0f0f0f;
 }
 
 #profiles-list:empty::after {
   content: 'No profiles yet';
   display: block;
   text-align: center;
-  color: #94a3b8;
-  padding: 20px;
+  color: #525252;
+  font-size: 13px;
+  padding: 16px;
 }
