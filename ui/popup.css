@@ -73,7 +73,7 @@ select:focus {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
   min-height: 70px;
   font-family: 'Courier New', monospace;
   font-size: 12px;
