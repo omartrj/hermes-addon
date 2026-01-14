@@ -1,5 +1,5 @@
 import { getFromStorage, setInStorage, clearStorage } from '../lib/storage-api.js';
-import { generateECDHKeyPair, exportPublicKey, exportPrivateKey, encryptMessage, decryptMessage } from '../lib/crypto-primitives.js';
+import { generateECDHKeyPair, exportPublicKey, exportPrivateKey, encryptMessage, decryptMessage, getCompactPublicKey } from '../lib/crypto-primitives.js';
 import { encryptVault, decryptVault } from '../lib/vault-manager.js';
 import { calculateSharedSecret, getSharedKey, addProfile, deleteProfile, getProfileNames } from '../lib/profile-logic.js';
 import { wrapEncryptedMessage, unwrapEncryptedMessage } from '../lib/utils.js';
@@ -138,7 +138,8 @@ async function handleResetVault() {
 function loadMainScreen() {
   UI.showMainScreen();
   UI.switchTab('profiles');
-  UI.setMyPublicKey(currentVault.publicKey);
+  const compactKey = getCompactPublicKey(currentVault.publicKey);
+  UI.setMyPublicKey(compactKey);
   UI.renderProfilesList(currentVault.profiles);
   UI.updateProfileSelectors(getProfileNames(currentVault.profiles));
 }
