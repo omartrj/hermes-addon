@@ -34,7 +34,7 @@ function setupEventListeners() {
   document.getElementById('add-profile-btn').addEventListener('click', handleAddProfile);
   document.getElementById('profiles-list').addEventListener('click', handleDeleteProfile);
   
-  document.getElementById('paste-plaintext-btn').addEventListener('click', () => handlePaste('plaintext-input'));
+  document.getElementById('copy-encrypted-btn').addEventListener('click', handleCopyEncrypted);
   document.getElementById('paste-encrypted-btn').addEventListener('click', () => handlePaste('encrypted-input'));
   
   document.getElementById('encrypt-btn').addEventListener('click', handleEncrypt);

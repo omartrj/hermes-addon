@@ -56,15 +56,15 @@
       </select>
 
       <label>Message:</label>
-      <div class="textarea-container">
-        <textarea id="plaintext-input" placeholder="Type your message here"></textarea>
-        <button class="paste-btn" id="paste-plaintext-btn">Paste</button>
-      </div>
+      <textarea id="plaintext-input" placeholder="Type your message here"></textarea>
 
       <button id="encrypt-btn">Encrypt</button>
 
       <label>Encrypted Message:</label>
-      <textarea id="encrypted-output" readonly></textarea>
+      <div class="textarea-container">
+        <textarea id="encrypted-output" readonly></textarea>
+        <button class="paste-btn" id="copy-encrypted-btn">Copy</button>
+      </div>
       <div id="encrypt-error" class="error"></div>
     </div>
 
