@@ -112,6 +112,7 @@ async function handleResetVault() {
 
 function loadMainScreen() {
   UI.showMainScreen();
+  UI.switchTab('profiles');
   UI.setMyPublicKey(currentVault.publicKey);
   UI.renderProfilesList(currentVault.profiles);
   UI.updateProfileSelectors(getProfileNames(currentVault.profiles));
