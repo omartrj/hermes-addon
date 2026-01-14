@@ -40,7 +40,10 @@
 
       <h3>Add New Profile</h3>
       <input type="text" id="profile-name" placeholder="Profile Name" />
-      <textarea id="profile-public-key" placeholder="Paste recipient's public key"></textarea>
+      <div class="textarea-container">
+        <textarea id="profile-public-key" placeholder="Paste recipient's public key"></textarea>
+        <button class="paste-btn" id="paste-profile-key-btn">Paste</button>
+      </div>
       <button id="add-profile-btn">Add Profile</button>
       <div id="profile-error" class="error"></div>
 

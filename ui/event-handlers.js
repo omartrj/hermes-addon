@@ -34,6 +34,7 @@ function setupEventListeners() {
   
   document.getElementById('copy-public-key-btn').addEventListener('click', handleCopyPublicKey);
   document.getElementById('add-profile-btn').addEventListener('click', handleAddProfile);
+  document.getElementById('paste-profile-key-btn').addEventListener('click', () => handlePaste('profile-public-key'));
   document.getElementById('profiles-list').addEventListener('click', handleDeleteProfile);
   
   document.getElementById('copy-encrypted-btn').addEventListener('click', handleCopyEncrypted);
