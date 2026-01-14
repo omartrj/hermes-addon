@@ -64,9 +64,13 @@ export function renderProfilesList(profiles) {
     name.textContent = profile.name;
     
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.className = 'danger';
+    deleteBtn.className = 'danger delete-icon-btn';
     deleteBtn.dataset.profileName = profile.name;
+    deleteBtn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.5a.5.5 0 0 0 0 1h.55l.72 10.09A2 2 0 0 0 5.76 15h4.48a2 2 0 0 0 1.99-1.91L12.95 3.5h.55a.5.5 0 0 0 0-1H11Z"/>
+      </svg>
+    `;
     
     item.appendChild(name);
     item.appendChild(deleteBtn);

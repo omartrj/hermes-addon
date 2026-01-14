@@ -197,9 +197,23 @@ button.secondary:hover {
 
 .profile-item button {
   width: auto;
-  padding: 4px 10px;
+  padding: 6px;
   margin: 0;
   font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+}
+
+.delete-icon-btn {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: white;
+}
+
+.delete-icon-btn svg {
+  pointer-events: none;
 }
 
 label {
