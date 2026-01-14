@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 450px;
+  min-height: 500px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.auth-container {
+  padding: 40px 30px;
+  background: white;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+  color: #2563eb;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #555;
+}
+
+h3 {
+  margin: 20px 0 10px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+button.danger {
+  background: #dc2626;
+}
+
+button.danger:hover {
+  background: #b91c1c;
+}
+
+button.secondary {
+  background: #64748b;
+}
+
+button.secondary:hover {
+  background: #475569;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 5px;
+  min-height: 18px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.tabs {
+  display: flex;
+  background: white;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px;
+  background: transparent;
+  color: #64748b;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-weight: 500;
+  margin-bottom: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: #f8fafc;
+  color: #334155;
+}
+
+.tab-btn.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+  background: white;
+}
+
+.tab-content {
+  padding: 20px;
+  background: white;
+  min-height: 450px;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+#profiles-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.profile-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.profile-item span {
+  font-weight: 500;
+  color: #334155;
+}
+
+.profile-item button {
+  width: auto;
+  padding: 6px 12px;
+  margin: 0;
+  font-size: 12px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #475569;
+}
+
+#my-public-key {
+  min-height: 100px;
+  background: #f8fafc;
+}
+
+#copy-public-key-btn {
+  background: #059669;
+  margin-bottom: 20px;
+}
+
+#copy-public-key-btn:hover {
+  background: #047857;
+}
+
+.textarea-container {
+  position: relative;
+}
+
+.paste-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: auto;
+  padding: 6px 12px;
+  margin: 0;
+  font-size: 12px;
+  background: #64748b;
+}
+
+.paste-btn:hover {
+  background: #475569;
+}
+
+#encrypted-output,
+#decrypted-output {
+  min-height: 120px;
+  background: #f8fafc;
+}
+
+#profiles-list:empty::after {
+  content: 'No profiles yet';
+  display: block;
+  text-align: center;
+  color: #94a3b8;
+  padding: 20px;
+}
