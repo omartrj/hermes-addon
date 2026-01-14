@@ -201,6 +201,7 @@ async function handleEncrypt() {
     const wrapped = wrapEncryptedMessage(encrypted);
     
     UI.setInputValue('encrypted-output', wrapped);
+    UI.clearInput('plaintext-input');
   } catch (error) {
     UI.showError('encrypt-error', 'Encryption failed');
   }
@@ -246,6 +247,7 @@ async function handleDecrypt() {
     const decrypted = await decryptMessage(sharedKey, unwrapped);
     
     UI.setInputValue('decrypted-output', decrypted);
+    UI.clearInput('encrypted-input');
   } catch (error) {
     UI.showError('decrypt-error', 'Decryption failed - invalid format or wrong profile');
   }
