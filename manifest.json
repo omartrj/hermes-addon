@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "End-to-end encrypted messaging using ECDH key exchange and AES-GCM encryption. Secure your online conversations.",
   "author": "Omar Criacci",
-  "homepage_url": "https://omarcriacci.com/hermes",
+  "homepage_url": "https://github.com/omartrj/hermes-addon",
 
   "browser_specific_settings": {
     "gecko": {
