@@ -130,6 +130,13 @@
   </div>
   
   <div class="option-group">
+    <h2>Import Vault</h2>
+    <div class="info-text">Import a previously exported vault. This will replace your current vault if one exists.</div>
+    <input type="file" id="import-file" accept=".json" style="display: none;">
+    <button id="import-btn">Import Vault</button>
+  </div>
+  
+  <div class="option-group">
     <h2>Emergency Data Wipe</h2>
     <div class="info-text">Permanently delete all local data including vault, keys, profiles, and sessions. This action cannot be undone.</div>
     <button id="nuke-btn" class="danger">Delete All Data</button>

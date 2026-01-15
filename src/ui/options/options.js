@@ -71,6 +71,58 @@ async function exportVault() {
 }
 
 /**
+ * Import encrypted vault
+ */
+async function importVault() {
+  const fileInput = document.getElementById('import-file');
+  fileInput.click();
+}
+
+/**
+ * Handle vault file import
+ */
+async function handleFileImport(event) {
+  const file = event.target.files[0];
+  
+  if (!file) {
+    return;
+  }
+  
+  try {
+    const text = await file.text();
+    const vault = JSON.parse(text);
+    
+    // Validate vault structure
+    if (!vault.encryptedPrivateKey || !vault.publicKey || !vault.profiles) {
+      showStatus('Invalid vault file format');
+      return;
+    }
+    
+    const confirmation = confirm(
+      'Importing a vault will replace your current vault.\n\n' +
+      'Are you sure you want to continue?'
+    );
+    
+    if (!confirmation) {
+      showStatus('Import cancelled');
+      return;
+    }
+    
+    await setInStorage('vault', vault);
+    
+    // Clear session if exists
+    await browser.storage.local.remove('sessionVault');
+    
+    showStatus('Vault imported successfully! Please reload the extension.');
+  } catch (error) {
+    showStatus('Import failed: Invalid file');
+  } finally {
+    // Reset file input
+    event.target.value = '';
+  }
+}
+
+/**
  * Delete all data (nuke)
  */
 async function nukeAllData() {
@@ -112,6 +164,8 @@ function setupEventListeners() {
   });
   
   document.getElementById('export-btn').addEventListener('click', exportVault);
+  document.getElementById('import-btn').addEventListener('click', importVault);
+  document.getElementById('import-file').addEventListener('change', handleFileImport);
   document.getElementById('nuke-btn').addEventListener('click', nukeAllData);
 }
 
