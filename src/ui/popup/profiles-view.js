@@ -1,10 +1,10 @@
-// Gestione view profili (add, delete, list)
+// Profiles view management (add, delete, list)
 import { getCompactPublicKey } from '../../core/crypto/ecdh.js';
 import { calculateSharedSecret, addProfile, deleteProfile, getProfileNames } from '../../core/profiles/profile-manager.js';
 import * as UI from './ui-helpers.js';
 
 /**
- * Imposta e visualizza la chiave pubblica dell'utente
+ * Set and display user's public key
  */
 export function displayMyPublicKey(publicKey) {
   const display = document.getElementById('key-display');
@@ -16,7 +16,7 @@ export function displayMyPublicKey(publicKey) {
 }
 
 /**
- * Gestisce la copia della chiave pubblica
+ * Handle public key copy
  */
 export async function handleCopyPublicKey() {
   const display = document.getElementById('key-display');
@@ -26,7 +26,7 @@ export async function handleCopyPublicKey() {
 }
 
 /**
- * Renderizza la lista dei profili
+ * Render profiles list
  */
 export function renderProfilesList(profiles) {
   const container = document.getElementById('profiles-list');
@@ -60,7 +60,7 @@ export function renderProfilesList(profiles) {
 }
 
 /**
- * Aggiorna i selettori di profilo nelle tab encrypt/decrypt
+ * Update profile selectors in encrypt/decrypt tabs
  */
 export function updateProfileSelectors(profileNames) {
   const encryptSelect = document.getElementById('encrypt-profile-select');
@@ -77,7 +77,7 @@ export function updateProfileSelectors(profileNames) {
       select.appendChild(option);
     });
     
-    // Mantieni la selezione se ancora valida
+    // Keep selection if still valid
     if (profileNames.includes(currentValue)) {
       select.value = currentValue;
     }
@@ -85,7 +85,7 @@ export function updateProfileSelectors(profileNames) {
 }
 
 /**
- * Gestisce l'aggiunta di un nuovo profilo
+ * Handle new profile addition
  */
 export async function handleAddProfile(vault) {
   const name = UI.getInputValue('profile-name').trim();
@@ -111,7 +111,7 @@ export async function handleAddProfile(vault) {
 }
 
 /**
- * Gestisce l'eliminazione di un profilo
+ * Handle profile deletion
  */
 export function handleDeleteProfile(vault, profileName) {
   if (UI.confirmAction(`Delete profile "${profileName}"?`)) {
@@ -121,7 +121,7 @@ export function handleDeleteProfile(vault, profileName) {
 }
 
 /**
- * Gestisce il paste della chiave pubblica
+ * Handle public key paste
  */
 export async function handlePasteProfileKey() {
   try {
@@ -133,7 +133,7 @@ export async function handlePasteProfileKey() {
 }
 
 /**
- * Ricarica completamente la view profili
+ * Fully reload profiles view
  */
 export function refreshProfilesView(vault) {
   displayMyPublicKey(vault.publicKey);

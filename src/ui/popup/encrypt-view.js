@@ -1,11 +1,11 @@
-// Gestione view cifratura messaggi
+// Message encryption view management
 import { getSharedKey } from '../../core/profiles/profile-manager.js';
 import { encryptMessage } from '../../core/crypto/aes.js';
 import { wrapEncryptedMessage } from '../../core/crypto/utils.js';
 import * as UI from './ui-helpers.js';
 
 /**
- * Gestisce la cifratura di un messaggio
+ * Handle message encryption
  */
 export async function handleEncrypt(vault) {
   const profileName = UI.getInputValue('encrypt-profile-select');
@@ -14,7 +14,7 @@ export async function handleEncrypt(vault) {
   UI.clearError('encrypt-error');
   UI.clearInput('encrypted-output');
   
-  // Validazione
+  // Validation
   if (!profileName) {
     UI.showError('encrypt-error', 'Please select a profile');
     return false;
@@ -41,7 +41,7 @@ export async function handleEncrypt(vault) {
 }
 
 /**
- * Gestisce la copia del messaggio cifrato
+ * Handle encrypted message copy
  */
 export async function handleCopyEncrypted() {
   const encryptedText = UI.getInputValue('encrypted-output');

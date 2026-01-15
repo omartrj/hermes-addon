@@ -1,8 +1,8 @@
-// Utilities crittografiche per conversioni e formatting
+// Cryptographic utilities for conversions and formatting
 import { MESSAGE_BEGIN_MARKER, MESSAGE_END_MARKER } from '../../shared/constants.js';
 
 /**
- * Converte ArrayBuffer in stringa Base64
+ * Convert ArrayBuffer to Base64 string
  */
 export function arrayBufferToBase64(buffer) {
   const bytes = new Uint8Array(buffer);
@@ -14,7 +14,7 @@ export function arrayBufferToBase64(buffer) {
 }
 
 /**
- * Converte stringa Base64 in ArrayBuffer
+ * Convert Base64 string to ArrayBuffer
  */
 export function base64ToArrayBuffer(base64) {
   const binary = atob(base64);
@@ -26,14 +26,14 @@ export function base64ToArrayBuffer(base64) {
 }
 
 /**
- * Wrappa un messaggio cifrato con marker visibili
+ * Wrap encrypted message with visible markers
  */
 export function wrapEncryptedMessage(base64Message) {
   return `${MESSAGE_BEGIN_MARKER}\n${base64Message}\n${MESSAGE_END_MARKER}`;
 }
 
 /**
- * Estrae il messaggio cifrato dai marker
+ * Extract encrypted message from markers
  */
 export function unwrapEncryptedMessage(wrappedMessage) {
   const pattern = new RegExp(
@@ -47,7 +47,7 @@ export function unwrapEncryptedMessage(wrappedMessage) {
 }
 
 /**
- * Genera bytes random per IV o salt
+ * Generate random bytes for IV or salt
  */
 export function generateRandomBytes(length) {
   return crypto.getRandomValues(new Uint8Array(length));

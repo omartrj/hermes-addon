@@ -1,10 +1,10 @@
-// Gestione view di autenticazione (create vault / unlock)
+// Authentication view management (create vault / unlock)
 import { createNewVault, unlockVault } from '../../core/vault/vault-manager.js';
 import { getFromStorage, setInStorage, clearStorage } from '../../core/storage/storage-service.js';
 import * as UI from './ui-helpers.js';
 
 /**
- * Mostra la view di creazione vault
+ * Show vault creation view
  */
 export function showCreateVaultView() {
   UI.show('create-vault-view');
@@ -13,7 +13,7 @@ export function showCreateVaultView() {
 }
 
 /**
- * Mostra la view di unlock vault
+ * Show vault unlock view
  */
 export function showUnlockVaultView() {
   UI.hide('create-vault-view');
@@ -22,7 +22,7 @@ export function showUnlockVaultView() {
 }
 
 /**
- * Gestisce la creazione di un nuovo vault
+ * Handle new vault creation
  */
 export async function handleCreateVault() {
   const password = UI.getInputValue('new-master-password');
@@ -30,7 +30,7 @@ export async function handleCreateVault() {
   
   UI.clearError('create-error');
   
-  // Validazione
+  // Validation
   if (!password || password.length < 8) {
     UI.showError('create-error', 'Password must be at least 8 characters');
     return null;
@@ -53,7 +53,7 @@ export async function handleCreateVault() {
 }
 
 /**
- * Gestisce l'unlock del vault
+ * Handle vault unlock
  */
 export async function handleUnlockVault() {
   const password = UI.getInputValue('unlock-password');
@@ -69,7 +69,7 @@ export async function handleUnlockVault() {
     const encryptedVault = await getFromStorage('vault');
     const vaultData = await unlockVault(password, encryptedVault);
     
-    // Gestione session storage
+    // Session storage management
     const settings = await getFromStorage('settings');
     const authMode = settings?.authMode || 'always';
     
@@ -85,7 +85,7 @@ export async function handleUnlockVault() {
 }
 
 /**
- * Gestisce il reset del vault
+ * Handle vault reset
  */
 export async function handleResetVault() {
   if (UI.confirmAction('This will delete all your data. Are you sure?')) {
@@ -98,7 +98,7 @@ export async function handleResetVault() {
 }
 
 /**
- * Verifica se esiste un vault
+ * Check if vault exists
  */
 export async function vaultExists() {
   const vault = await getFromStorage('vault');
@@ -106,7 +106,7 @@ export async function vaultExists() {
 }
 
 /**
- * Prova a recuperare vault dalla sessione
+ * Try to restore vault from session
  */
 export async function tryRestoreSession() {
   const sessionVault = await getFromStorage('sessionVault');

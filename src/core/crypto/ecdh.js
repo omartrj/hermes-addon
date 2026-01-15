@@ -1,9 +1,9 @@
-// Gestione ECDH key exchange e operazioni su chiavi pubbliche/private
+// ECDH key exchange management and public/private key operations
 import { arrayBufferToBase64, base64ToArrayBuffer } from './utils.js';
 import { ECDH_CURVE, SPKI_HEADER, AES_KEY_LENGTH } from '../../shared/constants.js';
 
 /**
- * Genera una nuova coppia di chiavi ECDH
+ * Generate new ECDH key pair
  */
 export async function generateECDHKeyPair() {
   return await crypto.subtle.generateKey(
@@ -17,7 +17,7 @@ export async function generateECDHKeyPair() {
 }
 
 /**
- * Esporta chiave pubblica in formato Base64
+ * Export public key in Base64 format
  */
 export async function exportPublicKey(publicKey) {
   const exported = await crypto.subtle.exportKey('spki', publicKey);
@@ -25,7 +25,7 @@ export async function exportPublicKey(publicKey) {
 }
 
 /**
- * Rimuove l'header SPKI per chiave compatta
+ * Remove SPKI header for compact key
  */
 export function getCompactPublicKey(fullPublicKey) {
   if (fullPublicKey.startsWith(SPKI_HEADER)) {
@@ -35,7 +35,7 @@ export function getCompactPublicKey(fullPublicKey) {
 }
 
 /**
- * Aggiunge l'header SPKI per chiave completa
+ * Add SPKI header for full key
  */
 export function expandCompactPublicKey(compactKey) {
   if (!compactKey.startsWith('MF')) {
@@ -45,7 +45,7 @@ export function expandCompactPublicKey(compactKey) {
 }
 
 /**
- * Importa chiave pubblica da Base64
+ * Import public key from Base64
  */
 export async function importPublicKey(base64Key) {
   const fullKey = expandCompactPublicKey(base64Key);
@@ -63,7 +63,7 @@ export async function importPublicKey(base64Key) {
 }
 
 /**
- * Esporta chiave privata in formato Base64
+ * Export private key in Base64 format
  */
 export async function exportPrivateKey(privateKey) {
   const exported = await crypto.subtle.exportKey('pkcs8', privateKey);
@@ -71,7 +71,7 @@ export async function exportPrivateKey(privateKey) {
 }
 
 /**
- * Importa chiave privata da Base64
+ * Import private key from Base64
  */
 export async function importPrivateKey(base64Key) {
   const keyData = base64ToArrayBuffer(base64Key);
@@ -88,7 +88,7 @@ export async function importPrivateKey(base64Key) {
 }
 
 /**
- * Deriva shared secret da chiavi ECDH (restituisce AES key)
+ * Derive shared secret from ECDH keys (returns AES key)
  */
 export async function deriveSharedSecret(privateKey, publicKey) {
   return await crypto.subtle.deriveKey(

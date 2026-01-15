@@ -1,8 +1,8 @@
-// Pagina impostazioni - gestione configurazione, export, reset
+// Settings page - configuration, export, reset management
 import { getFromStorage, setInStorage, clearStorage } from '../../core/storage/storage-service.js';
 
 /**
- * Carica le impostazioni salvate
+ * Load saved settings
  */
 async function loadSettings() {
   const settings = await getFromStorage('settings');
@@ -12,14 +12,14 @@ async function loadSettings() {
 }
 
 /**
- * Salva le impostazioni
+ * Save settings
  */
 async function saveSettings() {
   const authMode = document.querySelector('input[name="auth-mode"]:checked').value;
   
   await setInStorage('settings', { authMode });
   
-  // Se si torna ad "always", rimuove la sessione
+  // If returning to "always", remove session
   if (authMode === 'always') {
     await browser.storage.local.remove('sessionVault');
   }
@@ -28,7 +28,7 @@ async function saveSettings() {
 }
 
 /**
- * Mostra messaggio di status
+ * Show status message
  */
 function showStatus(message) {
   const status = document.getElementById('status');
@@ -40,7 +40,7 @@ function showStatus(message) {
 }
 
 /**
- * Esporta il vault cifrato
+ * Export encrypted vault
  */
 async function exportVault() {
   try {
@@ -71,7 +71,7 @@ async function exportVault() {
 }
 
 /**
- * Elimina tutti i dati (nuke)
+ * Delete all data (nuke)
  */
 async function nukeAllData() {
   const confirmation = confirm(
@@ -115,7 +115,7 @@ function setupEventListeners() {
   document.getElementById('nuke-btn').addEventListener('click', nukeAllData);
 }
 
-// Inizializzazione
+// Initialization
 document.addEventListener('DOMContentLoaded', () => {
   loadSettings();
   setupEventListeners();

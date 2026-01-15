@@ -1,22 +1,22 @@
-// Costanti globali per l'applicazione Hermes
+// Global constants for Hermes application
 
-// Header SPKI per chiavi pubbliche ECDH P-256
+// SPKI header for ECDH P-256 public keys
 export const SPKI_HEADER = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE';
 
-// Configurazione PBKDF2
+// PBKDF2 configuration
 export const PBKDF2_ITERATIONS = 100000;
 export const PBKDF2_HASH = 'SHA-256';
 
-// Configurazione AES-GCM
+// AES-GCM configuration
 export const AES_KEY_LENGTH = 256;
 export const AES_IV_LENGTH = 12;
 
-// Configurazione ECDH
+// ECDH configuration
 export const ECDH_CURVE = 'P-256';
 
-// Lunghezza salt per PBKDF2
+// Salt length for PBKDF2
 export const SALT_LENGTH = 16;
 
-// Marker per messaggi cifrati
+// Encrypted message markers
 export const MESSAGE_BEGIN_MARKER = '---BEGIN ENCRYPTED MESSAGE---';
 export const MESSAGE_END_MARKER = '---END ENCRYPTED MESSAGE---';

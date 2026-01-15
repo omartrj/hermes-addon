@@ -1,8 +1,8 @@
-// Utilities per l'interfaccia utente
-// Gestisce DOM manipulation, clipboard, messaggi di errore
+// User interface utilities
+// Handles DOM manipulation, clipboard, error messages
 
 /**
- * Mostra/nasconde elementi
+ * Show/hide elements
  */
 export function show(elementId) {
   document.getElementById(elementId).classList.remove('hidden');
@@ -17,7 +17,7 @@ export function toggle(elementId) {
 }
 
 /**
- * Gestione messaggi di errore
+ * Error message management
  */
 export function showError(elementId, message, duration = 5000) {
   const element = document.getElementById(elementId);
@@ -34,10 +34,10 @@ export function clearError(elementId) {
 }
 
 /**
- * Gestione tabs
+ * Tab management
  */
 export function switchTab(tabName) {
-  // Deseleziona tutti i bottoni e contenuti
+  // Deselect all buttons and content
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.remove('active');
   });
@@ -46,14 +46,14 @@ export function switchTab(tabName) {
     content.classList.add('hidden');
   });
   
-  // Attiva tab selezionato
+  // Activate selected tab
   document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
   document.getElementById(`${tabName}-tab`).classList.remove('hidden');
   document.getElementById(`${tabName}-tab`).classList.add('active');
 }
 
 /**
- * Gestione input
+ * Input management
  */
 export function getInputValue(elementId) {
   return document.getElementById(elementId).value;
@@ -76,7 +76,7 @@ export function focusInput(elementId) {
 }
 
 /**
- * Gestione clipboard
+ * Clipboard management
  */
 export async function copyToClipboard(text) {
   await navigator.clipboard.writeText(text);
@@ -87,7 +87,7 @@ export async function pasteFromClipboard() {
 }
 
 /**
- * Mostra toast notification
+ * Show toast notification
  */
 export function showToast(elementId, duration = 2000) {
   const toast = document.getElementById(elementId);
@@ -98,7 +98,7 @@ export function showToast(elementId, duration = 2000) {
 }
 
 /**
- * Gestione button state temporaneo
+ * Temporary button state management
  */
 export function setButtonText(elementId, text, originalText, duration = 2000) {
   const btn = document.getElementById(elementId);
@@ -109,7 +109,7 @@ export function setButtonText(elementId, text, originalText, duration = 2000) {
 }
 
 /**
- * Conferma azioni
+ * Confirm actions
  */
 export function confirmAction(message) {
   return confirm(message);

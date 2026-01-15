@@ -1,9 +1,9 @@
-// Gestione stato e operazioni del vault
+// Vault state management and operations
 import { encryptVault, decryptVault } from './vault-crypto.js';
 import { generateECDHKeyPair, exportPublicKey, exportPrivateKey } from '../crypto/ecdh.js';
 
 /**
- * Crea un nuovo vault con keypair generato
+ * Create new vault with generated keypair
  */
 export async function createNewVault(masterPassword) {
   const keyPair = await generateECDHKeyPair();
@@ -21,21 +21,21 @@ export async function createNewVault(masterPassword) {
 }
 
 /**
- * Sblocca un vault esistente
+ * Unlock existing vault
  */
 export async function unlockVault(masterPassword, encryptedVault) {
   return await decryptVault(masterPassword, encryptedVault);
 }
 
 /**
- * Salva il vault cifrandolo con la password
+ * Save vault by encrypting with password
  */
 export async function saveVault(masterPassword, vaultData) {
   return await encryptVault(masterPassword, vaultData);
 }
 
 /**
- * Valida la struttura del vault
+ * Validate vault structure
  */
 export function validateVaultData(vaultData) {
   if (!vaultData || typeof vaultData !== 'object') {

@@ -1,9 +1,9 @@
-// Gestione profili contatti e shared secrets
+// Contact profiles and shared secrets management
 import { importPublicKey, importPrivateKey, deriveSharedSecret } from '../crypto/ecdh.js';
 import { exportAESKey, importAESKey } from '../crypto/aes.js';
 
 /**
- * Calcola il shared secret tra due chiavi
+ * Calculate shared secret between two keys
  */
 export async function calculateSharedSecret(myPrivateKeyBase64, theirPublicKeyBase64) {
   const myPrivateKey = await importPrivateKey(myPrivateKeyBase64);
@@ -13,7 +13,7 @@ export async function calculateSharedSecret(myPrivateKeyBase64, theirPublicKeyBa
 }
 
 /**
- * Ottiene la chiave condivisa per un profilo
+ * Get shared key for profile
  */
 export async function getSharedKey(profiles, profileName) {
   const profile = profiles.find(p => p.name === profileName);
@@ -24,7 +24,7 @@ export async function getSharedKey(profiles, profileName) {
 }
 
 /**
- * Aggiunge un nuovo profilo
+ * Add new profile
  */
 export function addProfile(profiles, name, publicKey, sharedSecret) {
   const existing = profiles.find(p => p.name === name);
@@ -42,28 +42,28 @@ export function addProfile(profiles, name, publicKey, sharedSecret) {
 }
 
 /**
- * Rimuove un profilo
+ * Remove profile
  */
 export function deleteProfile(profiles, name) {
   return profiles.filter(p => p.name !== name);
 }
 
 /**
- * Ottiene i nomi di tutti i profili
+ * Get all profile names
  */
 export function getProfileNames(profiles) {
   return profiles.map(p => p.name);
 }
 
 /**
- * Trova un profilo per nome
+ * Find profile by name
  */
 export function findProfile(profiles, name) {
   return profiles.find(p => p.name === name);
 }
 
 /**
- * Valida i dati di un profilo
+ * Validate profile data
  */
 export function validateProfile(name, publicKey) {
   if (!name || typeof name !== 'string' || name.trim().length === 0) {

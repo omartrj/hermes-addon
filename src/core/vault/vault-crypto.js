@@ -1,10 +1,10 @@
-// Cifratura e decifratura del vault con master password
+// Vault encryption and decryption with master password
 import { arrayBufferToBase64, base64ToArrayBuffer, generateRandomBytes } from '../crypto/utils.js';
 import { deriveMasterKey } from '../crypto/key-derivation.js';
 import { SALT_LENGTH, AES_IV_LENGTH } from '../../shared/constants.js';
 
 /**
- * Cifra i dati del vault con la master password
+ * Encrypt vault data with master password
  */
 export async function encryptVault(masterPassword, vaultData) {
   const salt = generateRandomBytes(SALT_LENGTH);
@@ -29,7 +29,7 @@ export async function encryptVault(masterPassword, vaultData) {
 }
 
 /**
- * Decifra i dati del vault con la master password
+ * Decrypt vault data with master password
  */
 export async function decryptVault(masterPassword, encryptedVault) {
   const salt = base64ToArrayBuffer(encryptedVault.salt);

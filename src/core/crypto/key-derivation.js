@@ -1,8 +1,8 @@
-// Derivazione chiave master da password con PBKDF2
+// Master key derivation from password with PBKDF2
 import { PBKDF2_ITERATIONS, PBKDF2_HASH, AES_KEY_LENGTH } from '../../shared/constants.js';
 
 /**
- * Deriva una chiave AES da password usando PBKDF2
+ * Derive AES key from password using PBKDF2
  */
 export async function deriveMasterKey(password, salt) {
   const encoder = new TextEncoder();

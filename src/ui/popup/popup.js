@@ -1,4 +1,4 @@
-// Entry point del popup - orchestrazione e inizializzazione
+// Popup entry point - orchestration and initialization
 import { getFromStorage, setInStorage } from '../../core/storage/storage-service.js';
 import { saveVault } from '../../core/vault/vault-manager.js';
 import * as AuthView from './auth-view.js';
@@ -7,22 +7,22 @@ import * as EncryptView from './encrypt-view.js';
 import * as DecryptView from './decrypt-view.js';
 import * as UI from './ui-helpers.js';
 
-// Stato globale dell'applicazione
+// Global application state
 let currentVault = null;
 let currentPassword = null;
 
 /**
- * Inizializzazione dell'applicazione
+ * Application initialization
  */
 async function initialize() {
-  // Controlla se esiste un vault
+  // Check if vault exists
   if (!await AuthView.vaultExists()) {
     AuthView.showCreateVaultView();
     setupEventListeners();
     return;
   }
   
-  // Controlla la sessione
+  // Check session
   const settings = await getFromStorage('settings');
   const authMode = settings?.authMode || 'always';
   
@@ -30,20 +30,20 @@ async function initialize() {
     const sessionVault = await AuthView.tryRestoreSession();
     if (sessionVault) {
       currentVault = sessionVault;
-      // Password non disponibile in modalità sessione
+      // Password not available in session mode
       loadMainScreen();
       setupEventListeners();
       return;
     }
   }
   
-  // Mostra unlock view
+  // Show unlock view
   AuthView.showUnlockVaultView();
   setupEventListeners();
 }
 
 /**
- * Carica la schermata principale dopo l'autenticazione
+ * Load main screen after authentication
  */
 function loadMainScreen() {
   UI.hide('auth-screen');
@@ -53,7 +53,7 @@ function loadMainScreen() {
 }
 
 /**
- * Setup di tutti gli event listeners
+ * Setup all event listeners
  */
 function setupEventListeners() {
   // Auth events
@@ -89,7 +89,7 @@ function setupEventListeners() {
 }
 
 /**
- * Handler per creazione vault
+ * Handler for vault creation
  */
 async function handleCreateVaultClick() {
   const result = await AuthView.handleCreateVault();
@@ -101,7 +101,7 @@ async function handleCreateVaultClick() {
 }
 
 /**
- * Handler per unlock vault
+ * Handler for vault unlock
  */
 async function handleUnlockVaultClick() {
   const result = await AuthView.handleUnlockVault();
@@ -113,7 +113,7 @@ async function handleUnlockVaultClick() {
 }
 
 /**
- * Handler per reset vault
+ * Handler for vault reset
  */
 async function handleResetVaultClick() {
   const success = await AuthView.handleResetVault();
@@ -124,7 +124,7 @@ async function handleResetVaultClick() {
 }
 
 /**
- * Handler per aggiunta profilo
+ * Handler for profile addition
  */
 async function handleAddProfileClick() {
   const updatedProfiles = await ProfilesView.handleAddProfile(currentVault);
@@ -136,7 +136,7 @@ async function handleAddProfileClick() {
 }
 
 /**
- * Handler per click nella lista profili (delete)
+ * Handler for click in profiles list (delete)
  */
 async function handleProfilesListClick(e) {
   if (e.target.tagName === 'BUTTON' && e.target.classList.contains('danger')) {
@@ -152,30 +152,30 @@ async function handleProfilesListClick(e) {
 }
 
 /**
- * Handler per cifratura
+ * Handler for encryption
  */
 async function handleEncryptClick() {
   await EncryptView.handleEncrypt(currentVault);
 }
 
 /**
- * Handler per decifratura
+ * Handler for decryption
  */
 async function handleDecryptClick() {
   await DecryptView.handleDecrypt(currentVault);
 }
 
 /**
- * Salva il vault corrente
+ * Save current vault
  */
 async function saveCurrentVault() {
-  // Se abbiamo la password, salviamo il vault cifrato
+  // If we have password, save encrypted vault
   if (currentPassword) {
     const encryptedVault = await saveVault(currentPassword, currentVault);
     await setInStorage('vault', encryptedVault);
   }
   
-  // Aggiorna anche la sessione se necessario
+  // Also update session if necessary
   const settings = await getFromStorage('settings');
   const authMode = settings?.authMode || 'always';
   
@@ -184,5 +184,5 @@ async function saveCurrentVault() {
   }
 }
 
-// Avvia l'applicazione quando il DOM è pronto
+// Start application when DOM is ready
 document.addEventListener('DOMContentLoaded', initialize);

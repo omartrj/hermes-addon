@@ -1,11 +1,11 @@
-// Gestione view decifratura messaggi
+// Message decryption view management
 import { getSharedKey } from '../../core/profiles/profile-manager.js';
 import { decryptMessage } from '../../core/crypto/aes.js';
 import { unwrapEncryptedMessage } from '../../core/crypto/utils.js';
 import * as UI from './ui-helpers.js';
 
 /**
- * Gestisce la decifratura di un messaggio
+ * Handle message decryption
  */
 export async function handleDecrypt(vault) {
   const profileName = UI.getInputValue('decrypt-profile-select');
@@ -14,7 +14,7 @@ export async function handleDecrypt(vault) {
   UI.clearError('decrypt-error');
   UI.clearInput('decrypted-output');
   
-  // Validazione
+  // Validation
   if (!profileName) {
     UI.showError('decrypt-error', 'Please select a profile');
     return false;
@@ -41,7 +41,7 @@ export async function handleDecrypt(vault) {
 }
 
 /**
- * Gestisce il paste del messaggio cifrato
+ * Handle encrypted message paste
  */
 export async function handlePasteEncrypted() {
   try {
