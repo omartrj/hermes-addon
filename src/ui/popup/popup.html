@@ -35,24 +35,21 @@
 
     <div id="profiles-tab" class="tab-content active">
       <h3>Your Public Key</h3>
-      <div class="key-display-wrapper">
-        <button id="copy-public-key-btn" class="key-display-btn">
-          <span id="key-display"></span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2Z"/>
-            <path d="M2 6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1H6a3 3 0 0 1-3-3V6H2Z"/>
-          </svg>
-        </button>
-      </div>
-      <div id="copy-toast" class="toast">Copied!</div>
+      <button id="copy-public-key-btn" class="key-btn">
+        <span id="key-display"></span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2Z"/>
+          <path d="M2 6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1H6a3 3 0 0 1-3-3V6H2Z"/>
+        </svg>
+      </button>
 
       <h3>Add New Profile</h3>
-      <input type="text" id="profile-name" placeholder="Profile Name" />
-      <div class="textarea-container">
-        <textarea id="profile-public-key" placeholder="Paste recipient's public key"></textarea>
+      <input type="text" id="profile-name" placeholder="Name" />
+      <div class="input-with-btn">
+        <textarea id="profile-public-key" placeholder="Public key"></textarea>
         <button class="paste-btn" id="paste-profile-key-btn">Paste</button>
       </div>
-      <button id="add-profile-btn">Add Profile</button>
+      <button id="add-profile-btn">Add</button>
       <div id="profile-error" class="error"></div>
 
       <h3>Saved Profiles</h3>
@@ -60,19 +57,13 @@
     </div>
 
     <div id="encrypt-tab" class="tab-content">
-      <h3>Encrypt Message</h3>
-      <label>Select Profile:</label>
+      <h3>Encrypt</h3>
       <select id="encrypt-profile-select">
         <option value="">-- Select Profile --</option>
       </select>
-
-      <label>Message:</label>
-      <textarea id="plaintext-input" placeholder="Type your message here"></textarea>
-
+      <textarea id="plaintext-input" placeholder="Message"></textarea>
       <button id="encrypt-btn">Encrypt</button>
-
-      <label>Encrypted Message:</label>
-      <div class="textarea-container">
+      <div class="input-with-btn">
         <textarea id="encrypted-output" readonly></textarea>
         <button class="paste-btn" id="copy-encrypted-btn">Copy</button>
       </div>
@@ -80,26 +71,21 @@
     </div>
 
     <div id="decrypt-tab" class="tab-content">
-      <h3>Decrypt Message</h3>
-      <label>Select Profile:</label>
+      <h3>Decrypt</h3>
       <select id="decrypt-profile-select">
         <option value="">-- Select Profile --</option>
       </select>
-
-      <label>Encrypted Message:</label>
-      <div class="textarea-container">
-        <textarea id="encrypted-input" placeholder="Paste encrypted message here"></textarea>
+      <div class="input-with-btn">
+        <textarea id="encrypted-input" placeholder="Encrypted message"></textarea>
         <button class="paste-btn" id="paste-encrypted-btn">Paste</button>
       </div>
-
       <button id="decrypt-btn">Decrypt</button>
-
-      <label>Decrypted Message:</label>
       <textarea id="decrypted-output" readonly></textarea>
       <div id="decrypt-error" class="error"></div>
     </div>
   </div>
 
+  <div id="copy-toast" class="toast">Copied!</div>
   <script type="module" src="popup.js"></script>
 </body>
 </html>
