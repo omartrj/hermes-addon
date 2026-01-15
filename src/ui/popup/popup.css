@@ -312,7 +312,8 @@ button.danger:hover {
 .error {
   color: var(--error);
   font-size: 12px;
-  min-height: 14px;
+  height: 14px;
+  overflow: hidden;
 }
 
 .hidden {
