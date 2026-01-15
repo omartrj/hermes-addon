@@ -33,7 +33,7 @@ Hermes is a Firefox extension that provides end-to-end encryption for messaging 
 2. Choose the recipient profile
 3. Type or paste your message
 4. Click "Encrypt"
-5. The encrypted message is automatically copied to clipboard
+5. Copy the encrypted message
 6. Paste it into WhatsApp/Telegram/etc.
 
 ### Decrypting Messages
@@ -52,7 +52,3 @@ Hermes is a Firefox extension that provides end-to-end encryption for messaging 
 - Each profile uses a unique shared secret derived from ECDH
 - Messages use AES-GCM with random IVs for each encryption
 - If you forget your master password, you must reset the vault (losing all data)
-
-## License
-
-GPL-3.0 License. See the LICENSE file for details.
