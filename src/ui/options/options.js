@@ -80,8 +80,8 @@ async function nukeAllData() {
     '- All encryption keys\n' +
     '- All profiles\n' +
     '- Session data\n\n' +
-    'This action CANNOT be undone.\n\n' +
-    'Type "DELETE" to confirm:'
+    'This action CANNOT be undone.\n' +
+    'Are you sure you want to proceed?'
   );
   
   if (!confirmation) {

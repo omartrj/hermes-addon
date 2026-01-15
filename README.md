@@ -11,13 +11,6 @@ Hermes is a Firefox extension that provides end-to-end encryption for messaging 
 - **Clipboard Integration**: Easy copy/paste functionality
 - **Vanilla JavaScript**: No external dependencies
 
-## Installation
-
-1. Clone or download this repository
-2. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`
-3. Click "Load Temporary Add-on"
-4. Select the `manifest.json` file from the project directory
-
 ## Usage
 
 ### First Time Setup
