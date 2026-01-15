@@ -1,5 +1,6 @@
 // Settings page - configuration, export, reset management
 import { getFromStorage, setInStorage, clearStorage } from '../../core/storage/storage-service.js';
+import { STATUS_MESSAGE_DURATION } from '../../shared/constants.js';
 
 /**
  * Load saved settings
@@ -36,7 +37,7 @@ function showStatus(message) {
   status.classList.add('show');
   setTimeout(() => {
     status.classList.remove('show');
-  }, 2000);
+  }, STATUS_MESSAGE_DURATION);
 }
 
 /**

@@ -1,5 +1,6 @@
 // User interface utilities
 // Handles DOM manipulation, clipboard, error messages
+import { TOAST_DURATION, BUTTON_TEXT_DURATION } from '../../shared/constants.js';
 
 /**
  * Show/hide elements
@@ -89,7 +90,7 @@ export async function pasteFromClipboard() {
 /**
  * Show toast notification
  */
-export function showToast(elementId, duration = 2000) {
+export function showToast(elementId, duration = TOAST_DURATION) {
   const toast = document.getElementById(elementId);
   toast.classList.add('show');
   setTimeout(() => {
@@ -100,7 +101,7 @@ export function showToast(elementId, duration = 2000) {
 /**
  * Temporary button state management
  */
-export function setButtonText(elementId, text, originalText, duration = 2000) {
+export function setButtonText(elementId, text, originalText, duration = BUTTON_TEXT_DURATION) {
   const btn = document.getElementById(elementId);
   btn.textContent = text;
   setTimeout(() => {

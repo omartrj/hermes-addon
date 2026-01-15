@@ -1,6 +1,9 @@
 // AES-GCM operations for message encryption and decryption
 import { arrayBufferToBase64, base64ToArrayBuffer, generateRandomBytes } from './utils.js';
-import { AES_IV_LENGTH, AES_KEY_LENGTH } from '../../shared/constants.js';
+import { 
+  AES_IV_LENGTH, 
+  AES_KEY_LENGTH
+} from '../../shared/constants.js';
 
 /**
  * Encrypt message with AES-GCM

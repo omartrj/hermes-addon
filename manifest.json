@@ -2,7 +2,17 @@
   "manifest_version": 3,
   "name": "Hermes",
   "version": "1.0.0",
-  "description": "End-to-end encryption for messaging platforms",
+  "description": "End-to-end encrypted messaging using ECDH key exchange and AES-GCM encryption. Secure your online conversations.",
+  "author": "Omar Criacci",
+  "homepage_url": "https://omarcriacci.com/hermes",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "hermes@omarcriacci.com",
+      "strict_min_version": "109.0"
+    }
+  },
+
   "permissions": [
     "storage",
     "clipboardWrite",

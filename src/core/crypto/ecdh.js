@@ -1,6 +1,10 @@
 // ECDH key exchange management and public/private key operations
 import { arrayBufferToBase64, base64ToArrayBuffer } from './utils.js';
-import { ECDH_CURVE, SPKI_HEADER, AES_KEY_LENGTH } from '../../shared/constants.js';
+import { 
+  ECDH_CURVE, 
+  SPKI_HEADER, 
+  AES_KEY_LENGTH
+} from '../../shared/constants.js';
 
 /**
  * Generate new ECDH key pair

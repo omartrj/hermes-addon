@@ -1,5 +1,9 @@
 // Master key derivation from password with PBKDF2
-import { PBKDF2_ITERATIONS, PBKDF2_HASH, AES_KEY_LENGTH } from '../../shared/constants.js';
+import { 
+  PBKDF2_ITERATIONS, 
+  PBKDF2_HASH,
+  AES_KEY_LENGTH
+} from '../../shared/constants.js';
 
 /**
  * Derive AES key from password using PBKDF2
