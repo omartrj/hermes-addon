@@ -1,35 +1,14 @@
-import { arrayBufferToBase64, base64ToArrayBuffer, generateRandomBytes } from './utils.js';
+// Cifratura e decifratura del vault con master password
+import { arrayBufferToBase64, base64ToArrayBuffer, generateRandomBytes } from '../crypto/utils.js';
+import { deriveMasterKey } from '../crypto/key-derivation.js';
+import { SALT_LENGTH, AES_IV_LENGTH } from '../../shared/constants.js';
 
-export async function deriveMasterKey(password, salt) {
-  const encoder = new TextEncoder();
-  const passwordKey = await crypto.subtle.importKey(
-    'raw',
-    encoder.encode(password),
-    'PBKDF2',
-    false,
-    ['deriveKey']
-  );
-  
-  return await crypto.subtle.deriveKey(
-    {
-      name: 'PBKDF2',
-      salt: salt,
-      iterations: 100000,
-      hash: 'SHA-256'
-    },
-    passwordKey,
-    {
-      name: 'AES-GCM',
-      length: 256
-    },
-    false,
-    ['encrypt', 'decrypt']
-  );
-}
-
+/**
+ * Cifra i dati del vault con la master password
+ */
 export async function encryptVault(masterPassword, vaultData) {
-  const salt = generateRandomBytes(16);
-  const iv = generateRandomBytes(12);
+  const salt = generateRandomBytes(SALT_LENGTH);
+  const iv = generateRandomBytes(AES_IV_LENGTH);
   const masterKey = await deriveMasterKey(masterPassword, salt);
   
   const encoded = new TextEncoder().encode(JSON.stringify(vaultData));
@@ -49,6 +28,9 @@ export async function encryptVault(masterPassword, vaultData) {
   };
 }
 
+/**
+ * Decifra i dati del vault con la master password
+ */
 export async function decryptVault(masterPassword, encryptedVault) {
   const salt = base64ToArrayBuffer(encryptedVault.salt);
   const iv = base64ToArrayBuffer(encryptedVault.iv);

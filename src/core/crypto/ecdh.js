@@ -1,23 +1,32 @@
+// Gestione ECDH key exchange e operazioni su chiavi pubbliche/private
 import { arrayBufferToBase64, base64ToArrayBuffer } from './utils.js';
+import { ECDH_CURVE, SPKI_HEADER, AES_KEY_LENGTH } from '../../shared/constants.js';
 
+/**
+ * Genera una nuova coppia di chiavi ECDH
+ */
 export async function generateECDHKeyPair() {
   return await crypto.subtle.generateKey(
     {
       name: 'ECDH',
-      namedCurve: 'P-256'
+      namedCurve: ECDH_CURVE
     },
     true,
     ['deriveKey', 'deriveBits']
   );
 }
 
+/**
+ * Esporta chiave pubblica in formato Base64
+ */
 export async function exportPublicKey(publicKey) {
   const exported = await crypto.subtle.exportKey('spki', publicKey);
   return arrayBufferToBase64(exported);
 }
 
-const SPKI_HEADER = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE';
-
+/**
+ * Rimuove l'header SPKI per chiave compatta
+ */
 export function getCompactPublicKey(fullPublicKey) {
   if (fullPublicKey.startsWith(SPKI_HEADER)) {
     return fullPublicKey.slice(SPKI_HEADER.length);
@@ -25,6 +34,9 @@ export function getCompactPublicKey(fullPublicKey) {
   return fullPublicKey;
 }
 
+/**
+ * Aggiunge l'header SPKI per chiave completa
+ */
 export function expandCompactPublicKey(compactKey) {
   if (!compactKey.startsWith('MF')) {
     return SPKI_HEADER + compactKey;
@@ -32,6 +44,9 @@ export function expandCompactPublicKey(compactKey) {
   return compactKey;
 }
 
+/**
+ * Importa chiave pubblica da Base64
+ */
 export async function importPublicKey(base64Key) {
   const fullKey = expandCompactPublicKey(base64Key);
   const keyData = base64ToArrayBuffer(fullKey);
@@ -40,18 +55,24 @@ export async function importPublicKey(base64Key) {
     keyData,
     {
       name: 'ECDH',
-      namedCurve: 'P-256'
+      namedCurve: ECDH_CURVE
     },
     true,
     []
   );
 }
 
+/**
+ * Esporta chiave privata in formato Base64
+ */
 export async function exportPrivateKey(privateKey) {
   const exported = await crypto.subtle.exportKey('pkcs8', privateKey);
   return arrayBufferToBase64(exported);
 }
 
+/**
+ * Importa chiave privata da Base64
+ */
 export async function importPrivateKey(base64Key) {
   const keyData = base64ToArrayBuffer(base64Key);
   return await crypto.subtle.importKey(
@@ -59,13 +80,16 @@ export async function importPrivateKey(base64Key) {
     keyData,
     {
       name: 'ECDH',
-      namedCurve: 'P-256'
+      namedCurve: ECDH_CURVE
     },
     true,
     ['deriveKey', 'deriveBits']
   );
 }
 
+/**
+ * Deriva shared secret da chiavi ECDH (restituisce AES key)
+ */
 export async function deriveSharedSecret(privateKey, publicKey) {
   return await crypto.subtle.deriveKey(
     {
@@ -75,63 +99,7 @@ export async function deriveSharedSecret(privateKey, publicKey) {
     privateKey,
     {
       name: 'AES-GCM',
-      length: 256
-    },
-    true,
-    ['encrypt', 'decrypt']
-  );
-}
-
-export async function encryptMessage(sharedKey, plaintext) {
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const encoded = new TextEncoder().encode(plaintext);
-  
-  const ciphertext = await crypto.subtle.encrypt(
-    {
-      name: 'AES-GCM',
-      iv: iv
-    },
-    sharedKey,
-    encoded
-  );
-  
-  const combined = new Uint8Array(iv.length + ciphertext.byteLength);
-  combined.set(iv);
-  combined.set(new Uint8Array(ciphertext), iv.length);
-  
-  return arrayBufferToBase64(combined.buffer);
-}
-
-export async function decryptMessage(sharedKey, encryptedBase64) {
-  const combined = base64ToArrayBuffer(encryptedBase64);
-  const iv = combined.slice(0, 12);
-  const ciphertext = combined.slice(12);
-  
-  const decrypted = await crypto.subtle.decrypt(
-    {
-      name: 'AES-GCM',
-      iv: iv
-    },
-    sharedKey,
-    ciphertext
-  );
-  
-  return new TextDecoder().decode(decrypted);
-}
-
-export async function exportAESKey(key) {
-  const exported = await crypto.subtle.exportKey('raw', key);
-  return arrayBufferToBase64(exported);
-}
-
-export async function importAESKey(base64Key) {
-  const keyData = base64ToArrayBuffer(base64Key);
-  return await crypto.subtle.importKey(
-    'raw',
-    keyData,
-    {
-      name: 'AES-GCM',
-      length: 256
+      length: AES_KEY_LENGTH
     },
     true,
     ['encrypt', 'decrypt']

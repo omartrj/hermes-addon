@@ -9,11 +9,11 @@
     "clipboardRead"
   ],
   "options_ui": {
-    "page": "ui/options.html",
+    "page": "src/ui/options/options.html",
     "open_in_tab": true
   },
   "action": {
-    "default_popup": "ui/popup.html",
+    "default_popup": "src/ui/popup/popup.html",
     "default_icon": {
       "16": "icons/icon-16.png",
       "48": "icons/icon-48.png",

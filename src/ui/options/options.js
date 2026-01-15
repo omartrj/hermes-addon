@@ -1,17 +1,25 @@
+// Pagina impostazioni - gestione configurazione, export, reset
+import { getFromStorage, setInStorage, clearStorage } from '../../core/storage/storage-service.js';
+
+/**
+ * Carica le impostazioni salvate
+ */
 async function loadSettings() {
-  const settings = await browser.storage.local.get('settings');
-  const authMode = settings.settings?.authMode || 'always';
+  const settings = await getFromStorage('settings');
+  const authMode = settings?.authMode || 'always';
   
   document.querySelector(`input[value="${authMode}"]`).checked = true;
 }
 
+/**
+ * Salva le impostazioni
+ */
 async function saveSettings() {
   const authMode = document.querySelector('input[name="auth-mode"]:checked').value;
   
-  await browser.storage.local.set({
-    settings: { authMode }
-  });
+  await setInStorage('settings', { authMode });
   
+  // Se si torna ad "always", rimuove la sessione
   if (authMode === 'always') {
     await browser.storage.local.remove('sessionVault');
   }
@@ -19,6 +27,9 @@ async function saveSettings() {
   showStatus('Settings saved!');
 }
 
+/**
+ * Mostra messaggio di status
+ */
 function showStatus(message) {
   const status = document.getElementById('status');
   status.textContent = message;
@@ -28,16 +39,19 @@ function showStatus(message) {
   }, 2000);
 }
 
+/**
+ * Esporta il vault cifrato
+ */
 async function exportVault() {
   try {
-    const vault = await browser.storage.local.get('vault');
+    const vault = await getFromStorage('vault');
     
-    if (!vault.vault) {
+    if (!vault) {
       showStatus('No vault to export');
       return;
     }
     
-    const dataStr = JSON.stringify(vault.vault, null, 2);
+    const dataStr = JSON.stringify(vault, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     
@@ -56,6 +70,9 @@ async function exportVault() {
   }
 }
 
+/**
+ * Elimina tutti i dati (nuke)
+ */
 async function nukeAllData() {
   const confirmation = confirm(
     'WARNING: This will permanently delete ALL your data including:\n\n' +
@@ -79,18 +96,27 @@ async function nukeAllData() {
   }
   
   try {
-    await browser.storage.local.clear();
+    await clearStorage();
     showStatus('All data deleted. Please restart the extension.');
   } catch (error) {
     showStatus('Failed to delete data');
   }
 }
 
-document.addEventListener('DOMContentLoaded', loadSettings);
+/**
+ * Setup event listeners
+ */
+function setupEventListeners() {
+  document.querySelectorAll('input[name="auth-mode"]').forEach(radio => {
+    radio.addEventListener('change', saveSettings);
+  });
+  
+  document.getElementById('export-btn').addEventListener('click', exportVault);
+  document.getElementById('nuke-btn').addEventListener('click', nukeAllData);
+}
 
-document.querySelectorAll('input[name="auth-mode"]').forEach(radio => {
-  radio.addEventListener('change', saveSettings);
+// Inizializzazione
+document.addEventListener('DOMContentLoaded', () => {
+  loadSettings();
+  setupEventListeners();
 });
-
-document.getElementById('export-btn').addEventListener('click', exportVault);
-document.getElementById('nuke-btn').addEventListener('click', nukeAllData);

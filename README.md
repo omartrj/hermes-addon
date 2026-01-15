@@ -52,28 +52,6 @@ Hermes is a Firefox extension that provides end-to-end encryption for messaging 
 5. Click "Decrypt"
 6. Read the decrypted message
 
-## Architecture
-
-```
-hermes/
-├── manifest.json
-├── lib/
-│   ├── crypto-primitives.js    # Web Crypto API wrappers
-│   ├── vault-manager.js         # Master password & vault encryption
-│   ├── profile-logic.js         # Profile & shared secret management
-│   ├── storage-api.js           # Browser storage wrapper
-│   └── utils.js                 # Base64 & message formatting
-├── ui/
-│   ├── popup.html               # Extension popup UI
-│   ├── popup.css                # Styling
-│   ├── ui-manager.js            # DOM manipulation
-│   └── event-handlers.js        # Event coordination
-└── icons/
-    ├── icon-16.png
-    ├── icon-48.png
-    └── icon-128.png
-```
-
 ## Security Notes
 
 - All keys are stored encrypted with your master password
@@ -84,4 +62,4 @@ hermes/
 
 ## License
 
-MIT
+GPL-3.0 License. See the LICENSE file for details.
