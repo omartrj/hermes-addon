@@ -37,7 +37,7 @@ h1 {
   color: var(--accent);
   font-size: 22px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 h2 {
@@ -45,7 +45,7 @@ h2 {
   font-size: 14px;
   font-weight: 400;
   color: var(--text-dim);
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 h3 {
@@ -62,19 +62,35 @@ h3 {
   text-align: center;
 }
 
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-dimmer);
+  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
 /* Form Elements */
 input,
 textarea,
 select {
   width: 100%;
-  padding: 6px 8px;
+  padding: 8px 10px;
   margin-bottom: 4px;
   border: 1px solid var(--border);
   border-radius: 3px;
   font: inherit;
+  font-size: 14px;
   background: var(--bg-dark);
   color: var(--text);
   transition: border-color 0.15s, background 0.15s;
+}
+
+.auth-container input {
+  font-size: 15px;
+  padding: 9px 11px;
+  margin-bottom: 8px;
 }
 
 input:focus,
@@ -126,6 +142,10 @@ button.danger:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.auth-container button {
+  margin-top: 4px;
 }
 
 /* Main */
