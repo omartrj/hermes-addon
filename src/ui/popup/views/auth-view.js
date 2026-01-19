@@ -1,7 +1,7 @@
 // Authentication view management
-import { createNewVault, unlockVault } from '../../core/vault/vault-manager.js';
-import * as SessionManager from '../../core/storage/session-manager.js';
-import * as UI from './ui-helpers.js';
+import { createNewVault, unlockVault } from '../../../core/vault/vault-manager.js';
+import * as SessionManager from '../../../core/storage/session-manager.js';
+import * as UI from '../ui-helpers.js';
 
 /**
  * Show vault creation view

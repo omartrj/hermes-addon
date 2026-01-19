@@ -1,9 +1,9 @@
 // Message decryption view management
-import { getSharedKey } from '../../core/profiles/profile-manager.js';
-import { decryptMessage } from '../../core/crypto/aes.js';
-import { unwrapEncryptedMessage } from '../../core/crypto/utils.js';
-import { local } from '../../core/storage/storage-service.js';
-import * as UI from './ui-helpers.js';
+import { getSharedKey } from '../../../core/profiles/profile-manager.js';
+import { decryptMessage } from '../../../core/crypto/aes.js';
+import { unwrapEncryptedMessage } from '../../../core/crypto/utils.js';
+import { local } from '../../../core/storage/storage-service.js';
+import * as UI from '../ui-helpers.js';
 
 /**
  * Handle message decryption

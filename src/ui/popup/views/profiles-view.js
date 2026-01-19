@@ -1,8 +1,8 @@
 // Profiles view management (add, delete, list)
-import { getCompactPublicKey } from '../../core/crypto/ecdh.js';
-import { calculateSharedSecret, addProfile, deleteProfile, getProfileNames } from '../../core/profiles/profile-manager.js';
-import { local } from '../../core/storage/storage-service.js';
-import * as UI from './ui-helpers.js';
+import { getCompactPublicKey } from '../../../core/crypto/ecdh.js';
+import { calculateSharedSecret, addProfile, deleteProfile, getProfileNames } from '../../../core/profiles/profile-manager.js';
+import { local } from '../../../core/storage/storage-service.js';
+import * as UI from '../ui-helpers.js';
 
 /**
  * Set and display user's public key
