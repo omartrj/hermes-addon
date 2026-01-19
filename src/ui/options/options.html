@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hermes Settings</title>
+  <link rel="icon" href="/icons/icon-48.png">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #e5e5e5;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      color: #3b82f6;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .option-group {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .option-group h2 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #a3a3a3;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 8px;
+      background: #0f0f0f;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+    
+    label:hover {
+      background: #252525;
+    }
+    
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    
+    .description {
+      font-size: 13px;
+      color: #737373;
+      margin-left: 24px;
+      margin-top: 4px;
+    }
+    
+    .status {
+      padding: 12px;
+      background: #059669;
+      color: white;
+      border-radius: 4px;
+      margin-top: 16px;
+      display: none;
+    }
+    
+    .status.show {
+      display: block;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 8px;
+    }
+    
+    button:hover {
+      background: #2563eb;
+    }
+    
+    button.danger {
+      background: #dc2626;
+    }
+    
+    button.danger:hover {
+      background: #b91c1c;
+    }
+    
+    .info-text {
+      font-size: 13px;
+      color: #737373;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hermes Settings</h1>
+  
+  <div class="option-group">
+    <h2>Password Authentication</h2>
+    
+    <label>
+      <input type="radio" name="auth-mode" value="always" checked>
+      Always ask for password
+      <div class="description">Request master password every time the popup is opened</div>
+    </label>
+    
+    <label>
+      <input type="radio" name="auth-mode" value="session">
+      Remember until browser closes
+      <div class="description">Stay unlocked until Firefox is closed</div>
+    </label>
+  </div>
+  
+  <div class="option-group">
+    <h2>Backup & Export</h2>
+    <div class="info-text">Export your encrypted vault for backup purposes. The exported file contains all your encrypted keys and profiles.</div>
+    <button id="export-btn">Export Encrypted Vault</button>
+  </div>
+  
+  <div class="option-group">
+    <h2>Import Vault</h2>
+    <div class="info-text">Import a previously exported vault. This will replace your current vault if one exists.</div>
+    <input type="file" id="import-file" accept=".json" style="display: none;">
+    <button id="import-btn">Import Vault</button>
+  </div>
+  
+  <div class="option-group">
+    <h2>Emergency Data Wipe</h2>
+    <div class="info-text">Permanently delete all local data including vault, keys, profiles, and sessions. This action cannot be undone.</div>
+    <button id="nuke-btn" class="danger">Delete All Data</button>
+  </div>
+  
+  <div class="status" id="status">Settings saved!</div>
+  
+  <script type="module" src="options.js"></script>
+</body>
+</html>

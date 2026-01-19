@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hermes</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="auth-screen">
+    <div class="auth-container">
+      <h1>Hermes</h1>
+      <p class="subtitle">The Secure Messenger</p>
+      <div id="create-vault-view">
+        <h2>Create Master Password</h2>
+        <input type="password" id="new-master-password" placeholder="Master Password" />
+        <input type="password" id="confirm-master-password" placeholder="Confirm Password" />
+        <button id="create-vault-btn">Create Vault</button>
+        <div id="create-error" class="error"></div>
+      </div>
+      <div id="unlock-vault-view" class="hidden">
+        <h2>Unlock Vault</h2>
+        <input type="password" id="unlock-password" placeholder="Master Password" />
+        <button id="unlock-btn">Unlock</button>
+        <button id="reset-vault-btn" class="danger">Reset Vault</button>
+        <div id="unlock-error" class="error"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-screen" class="hidden">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="profiles">Profiles</button>
+      <button class="tab-btn" data-tab="encrypt">Encrypt</button>
+      <button class="tab-btn" data-tab="decrypt">Decrypt</button>
+    </div>
+
+    <div id="profiles-tab" class="tab-content active">
+      <h3>Your Public Key</h3>
+      <button id="copy-public-key-btn" class="key-btn">
+        <span id="key-display"></span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2Z"/>
+          <path d="M2 6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1H6a3 3 0 0 1-3-3V6H2Z"/>
+        </svg>
+      </button>
+
+      <h3>Add New Profile</h3>
+      <input type="text" id="profile-name" placeholder="Name" />
+      <div class="input-with-btn">
+        <textarea id="profile-public-key" placeholder="Their public key"></textarea>
+        <button class="paste-btn" id="paste-profile-key-btn">Paste</button>
+      </div>
+      <button id="add-profile-btn">Add</button>
+      <div id="profile-error" class="error"></div>
+
+      <h3>Saved Profiles</h3>
+      <div id="profiles-list"></div>
+    </div>
+
+    <div id="encrypt-tab" class="tab-content">
+      <h3>Encrypt</h3>
+      <select id="encrypt-profile-select">
+        <option value="">-- Select Profile --</option>
+      </select>
+      <textarea id="plaintext-input" placeholder="Message"></textarea>
+      <button id="encrypt-btn">Encrypt</button>
+      <div class="input-with-btn">
+        <textarea id="encrypted-output" readonly></textarea>
+        <button class="paste-btn" id="copy-encrypted-btn">Copy</button>
+      </div>
+      <div id="encrypt-error" class="error"></div>
+    </div>
+
+    <div id="decrypt-tab" class="tab-content">
+      <h3>Decrypt</h3>
+      <select id="decrypt-profile-select">
+        <option value="">-- Select Profile --</option>
+      </select>
+      <div class="input-with-btn">
+        <textarea id="encrypted-input" placeholder="Encrypted message"></textarea>
+        <button class="paste-btn" id="paste-encrypted-btn">Paste</button>
+      </div>
+      <button id="decrypt-btn">Decrypt</button>
+      <textarea id="decrypted-output" readonly></textarea>
+      <div id="decrypt-error" class="error"></div>
+    </div>
+  </div>
+
+  <div id="copy-toast" class="toast">Copied!</div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
