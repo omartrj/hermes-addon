@@ -1,4 +1,4 @@
-[<img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="for Firefox" height="60px">](https://addons.mozilla.org/it/firefox/addon/hermes-messanger/)
+[<img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="for Firefox" height="60px">](https://addons.mozilla.org/it/firefox/addon/hermes-messenger/)
 
 # <img src="icons/icon-48.png" alt="Hermes Logo" width="32"> Hermes
 
