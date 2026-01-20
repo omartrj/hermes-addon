@@ -71,7 +71,7 @@ async function importVault(event) {
     const text = await file.text();
     const vault = JSON.parse(text);
     
-    if (!vault || !vault.encrypted || !vault.iv || !vault.salt) {
+    if (!vault || !vault.data || !vault.iv || !vault.salt) {
       showStatus('Invalid vault file');
       return;
     }
