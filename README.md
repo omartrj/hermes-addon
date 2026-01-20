@@ -12,6 +12,12 @@ Hermes relies on proven cryptographic standards to ensure the confidentiality an
 * **Encryption/Decryption:** [AES-GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode) (256-bit) for authenticated encryption.
 * **Key Derivation:** [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) (100,000 iterations) to derive encryption keys from your master password.
 
+</br>
+<p align="center">
+  <img src="screenshots/preview.png" alt="Message Encryption" width="80%">
+</p>
+
+
 ## Features
 
 * **Platform Agnostic:** Works on top of any web messaging service.
