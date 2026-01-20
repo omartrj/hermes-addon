@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Hermes",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "End-to-end encrypted messaging using ECDH key exchange and AES-GCM encryption. Secure your online conversations.",
   "author": "Omar Criacci",
   "homepage_url": "https://github.com/omartrj/hermes-addon",
