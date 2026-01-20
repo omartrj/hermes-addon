@@ -14,7 +14,7 @@ Hermes relies on proven cryptographic standards to ensure the confidentiality an
 
 </br>
 <p align="center">
-  <img src="screenshots/preview.png" alt="Message Encryption" width="80%">
+  <img src="screenshots/preview.png" alt="Message Encryption" width="90%">
 </p>
 
 
