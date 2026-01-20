@@ -1,4 +1,6 @@
+.env
 build.sh
+publish.sh
 *.bak
 releases/
 screenshots/html/
