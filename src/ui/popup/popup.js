@@ -1,9 +1,9 @@
 // Popup entry point - orchestration
 import * as SessionManager from '../../core/storage/session-manager.js';
-import * as AuthView from './auth-view.js';
-import * as ProfilesView from './profiles-view.js';
-import * as EncryptView from './encrypt-view.js';
-import * as DecryptView from './decrypt-view.js';
+import * as AuthView from './views/auth-view.js';
+import * as ProfilesView from './views/profiles-view.js';
+import * as EncryptView from './views/encrypt-view.js';
+import * as DecryptView from './views/encrypt-view.js';
 import * as UI from './ui-helpers.js';
 
 // Global application state
