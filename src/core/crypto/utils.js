@@ -1,5 +1,5 @@
 // Cryptographic utilities for conversions and formatting
-import { MESSAGE_BEGIN_MARKER, MESSAGE_END_MARKER, ERROR_INVALID_MESSAGE_FORMAT } from '../../shared/constants.js';
+import { MESSAGE_BEGIN_MARKER, MESSAGE_END_MARKER, ERROR_INVALID_MESSAGE_FORMAT } from '../../config/constants.js';
 
 /**
  * Convert ArrayBuffer to Base64 string

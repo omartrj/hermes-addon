@@ -1,7 +1,7 @@
 // Shared view utilities to eliminate code duplication
-import { local } from '../../../core/storage/storage-service.js';
-import * as UI from '../ui-helpers.js';
-import { ERROR_SELECT_PROFILE } from '../../../shared/constants.js';
+import { local } from '../../core/storage/storage-service.js';
+import * as UI from '../popup/ui-helpers.js';
+import { ERROR_SELECT_PROFILE } from '../../config/constants.js';
 
 /**
  * Save last used profile to storage

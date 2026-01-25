@@ -3,7 +3,7 @@ import {
   PBKDF2_ITERATIONS, 
   PBKDF2_HASH,
   AES_KEY_LENGTH
-} from '../../shared/constants.js';
+} from '../../config/constants.js';
 
 /**
  * Derive AES key from password using PBKDF2

@@ -10,7 +10,7 @@ import {
   ERROR_INCORRECT_PASSWORD,
   ERROR_VAULT_CREATION_FAILED,
   CONFIRM_RESET_VAULT
-} from '../../../shared/constants.js';
+} from '../../../config/constants.js';
 
 /**
  * Show vault creation view

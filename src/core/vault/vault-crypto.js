@@ -1,7 +1,7 @@
 // Vault encryption and decryption with master password
 import { arrayBufferToBase64, base64ToArrayBuffer, generateRandomBytes } from '../crypto/utils.js';
 import { deriveMasterKey } from '../crypto/key-derivation.js';
-import { SALT_LENGTH, AES_IV_LENGTH } from '../../shared/constants.js';
+import { SALT_LENGTH, AES_IV_LENGTH } from '../../config/constants.js';
 
 /**
  * Encrypt vault data with master password

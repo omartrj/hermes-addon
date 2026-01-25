@@ -3,14 +3,14 @@ import { getSharedKey } from '../../../core/profiles/profile-manager.js';
 import { decryptMessage } from '../../../core/crypto/aes.js';
 import { unwrapEncryptedMessage } from '../../../core/crypto/utils.js';
 import * as UI from '../ui-helpers.js';
-import { ERROR_DECRYPTION_FAILED } from '../../../shared/constants.js';
+import { ERROR_DECRYPTION_FAILED } from '../../../config/constants.js';
 import {
   validateProfileSelection,
   prepareView,
   handleOperationSuccess,
   handleOperationFailure,
   handlePasteToInput
-} from './view-helpers.js';
+} from '../../common/view-helpers.js';
 
 /**
  * Handle message decryption

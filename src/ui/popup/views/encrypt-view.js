@@ -3,13 +3,13 @@ import { getSharedKey } from '../../../core/profiles/profile-manager.js';
 import { encryptMessage } from '../../../core/crypto/aes.js';
 import { wrapEncryptedMessage } from '../../../core/crypto/utils.js';
 import * as UI from '../ui-helpers.js';
-import { ERROR_MESSAGE_REQUIRED, ERROR_ENCRYPTION_FAILED } from '../../../shared/constants.js';
+import { ERROR_MESSAGE_REQUIRED, ERROR_ENCRYPTION_FAILED } from '../../../config/constants.js';
 import {
   validateProfileSelection,
   prepareView,
   handleOperationSuccess,
   handleOperationFailure
-} from './view-helpers.js';
+} from '../../common/view-helpers.js';
 
 /**
  * Handle message encryption

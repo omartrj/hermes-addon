@@ -7,8 +7,8 @@ import {
   ERROR_PUBLIC_KEY_REQUIRED,
   ERROR_PROFILE_ADD_FAILED,
   CONFIRM_DELETE_PROFILE
-} from '../../../shared/constants.js';
-import { getLastUsedProfile, handlePasteToInput } from './view-helpers.js';
+} from '../../../config/constants.js';
+import { getLastUsedProfile, handlePasteToInput } from '../../common/view-helpers.js';
 
 /**
  * Set and display user's public key

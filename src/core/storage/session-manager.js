@@ -1,28 +1,26 @@
-// Session management - handles auth modes and session state
+// Session orchestrator - coordinates session, vault and settings
+// This module orchestrates high-level operations across multiple services
 import { local, session } from './storage-service.js';
-import { saveVault } from '../vault/vault-manager.js';
-
-const SETTINGS_KEY = 'settings';
-const VAULT_KEY = 'vault';
-const SESSION_STATE_KEY = 'sessionState';
+import { getAuthMode, setAuthMode as updateAuthMode } from './settings-service.js';
+import { saveEncryptedVault, getEncryptedVault, vaultExists } from './vault-storage.js';
+import { saveSessionState, restoreSessionState, clearSessionState } from './session-service.js';
 
 /**
  * Get current auth mode
  */
-export async function getAuthMode() {
-  const settings = await local.get(SETTINGS_KEY);
-  return settings?.authMode || 'always';
+export async function getAuthModeFromSettings() {
+  return await getAuthMode();
 }
 
 /**
- * Set auth mode
+ * Set auth mode and clear session if needed
  */
 export async function setAuthMode(mode) {
-  await local.set(SETTINGS_KEY, { authMode: mode });
+  await updateAuthMode(mode);
   
   // Clear session when switching to 'always' mode
   if (mode === 'always') {
-    await session.clear();
+    await clearSessionState();
   }
 }
 
@@ -31,15 +29,7 @@ export async function setAuthMode(mode) {
  * Only used in 'session' auth mode
  */
 export async function saveSession(vaultData, password) {
-  const authMode = await getAuthMode();
-  
-  if (authMode === 'session') {
-    await session.set(SESSION_STATE_KEY, {
-      vault: vaultData,
-      password: password,
-      timestamp: Date.now()
-    });
-  }
+  await saveSessionState(vaultData, password);
 }
 
 /**
@@ -47,57 +37,36 @@ export async function saveSession(vaultData, password) {
  * Returns { vault, password } or null
  */
 export async function restoreSession() {
-  const authMode = await getAuthMode();
-  
-  if (authMode !== 'session') {
-    return null;
-  }
-  
-  const sessionState = await session.get(SESSION_STATE_KEY);
-  
-  if (!sessionState) {
-    return null;
-  }
-  
-  return {
-    vault: sessionState.vault,
-    password: sessionState.password
-  };
+  return await restoreSessionState();
 }
 
 /**
  * Clear session state
  */
 export async function clearSession() {
-  await session.clear();
+  await clearSessionState();
 }
 
 /**
  * Save vault to persistent storage and update session if needed
  */
 export async function persistVault(vaultData, password) {
-  // Always save encrypted vault to local storage
-  const encryptedVault = await saveVault(password, vaultData);
-  await local.set(VAULT_KEY, encryptedVault);
+  // Save encrypted vault to local storage
+  await saveEncryptedVault(vaultData, password);
   
   // Update session if in session mode
-  await saveSession(vaultData, password);
+  await saveSessionState(vaultData, password);
 }
 
 /**
  * Get encrypted vault from storage
  */
-export async function getEncryptedVault() {
-  return await local.get(VAULT_KEY);
-}
+export { getEncryptedVault };
 
 /**
  * Check if vault exists
  */
-export async function vaultExists() {
-  const vault = await local.get(VAULT_KEY);
-  return vault !== undefined;
-}
+export { vaultExists };
 
 /**
  * Delete all data (vault + session + settings)

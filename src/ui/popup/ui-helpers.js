@@ -1,6 +1,6 @@
 // User interface utilities
 // Handles DOM manipulation, clipboard, error messages
-import { TOAST_DURATION, BUTTON_TEXT_DURATION } from '../../shared/constants.js';
+import { TOAST_DURATION, BUTTON_TEXT_DURATION } from '../../config/constants.js';
 
 /**
  * Show/hide elements

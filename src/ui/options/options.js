@@ -1,5 +1,6 @@
 // Settings page management
 import * as SessionManager from '../../core/storage/session-manager.js';
+import { getAuthMode } from '../../core/storage/settings-service.js';
 import { local } from '../../core/storage/storage-service.js';
 import {
   STATUS_MESSAGE_DURATION,
@@ -16,13 +17,13 @@ import {
   INFO_DELETE_CANCELLED,
   SUCCESS_VAULT_IMPORTED,
   SUCCESS_DATA_DELETED
-} from '../../shared/constants.js';
+} from '../../config/constants.js';
 
 /**
  * Load saved settings
  */
 async function loadSettings() {
-  const authMode = await SessionManager.getAuthMode();
+  const authMode = await getAuthMode();
   document.querySelector(`input[value="${authMode}"]`).checked = true;
 }
 

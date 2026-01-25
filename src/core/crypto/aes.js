@@ -3,7 +3,7 @@ import { arrayBufferToBase64, base64ToArrayBuffer, generateRandomBytes } from '.
 import { 
   AES_IV_LENGTH, 
   AES_KEY_LENGTH
-} from '../../shared/constants.js';
+} from '../../config/constants.js';
 
 /**
  * Encrypt message with AES-GCM

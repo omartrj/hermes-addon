@@ -4,7 +4,7 @@ import {
   ECDH_CURVE, 
   SPKI_HEADER, 
   AES_KEY_LENGTH
-} from '../../shared/constants.js';
+} from '../../config/constants.js';
 
 /**
  * Generate new ECDH key pair
