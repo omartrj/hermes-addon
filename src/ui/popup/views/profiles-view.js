@@ -1,13 +1,14 @@
 // Profiles view management (add, delete, list)
 import { getCompactPublicKey } from '../../../core/crypto/ecdh.js';
 import { calculateSharedSecret, addProfile, deleteProfile, getProfileNames } from '../../../core/profiles/profile-manager.js';
-import { local } from '../../../core/storage/storage-service.js';
 import * as UI from '../ui-helpers.js';
 import {
   ERROR_PROFILE_NAME_REQUIRED,
   ERROR_PUBLIC_KEY_REQUIRED,
+  ERROR_PROFILE_ADD_FAILED,
   CONFIRM_DELETE_PROFILE
 } from '../../../shared/constants.js';
+import { getLastUsedProfile, handlePasteToInput } from './view-helpers.js';
 
 /**
  * Set and display user's public key
@@ -73,7 +74,7 @@ export async function updateProfileSelectors(profileNames) {
   const decryptSelect = document.getElementById('decrypt-profile-select');
   
   // Get last used profile
-  const lastUsedProfile = await local.get('lastUsedProfile');
+  const lastUsedProfile = await getLastUsedProfile();
   
   [encryptSelect, decryptSelect].forEach(select => {
     const currentValue = select.value;
@@ -123,7 +124,7 @@ export async function handleAddProfile(vault) {
     UI.clearInputs(['profile-name', 'profile-public-key']);
     return updatedProfiles;
   } catch (error) {
-    UI.showError('profile-error', error.message || 'Failed to add profile');
+    UI.showError('profile-error', error.message || ERROR_PROFILE_ADD_FAILED);
     return null;
   }
 }
@@ -142,12 +143,7 @@ export function handleDeleteProfile(vault, profileName) {
  * Handle public key paste
  */
 export async function handlePasteProfileKey() {
-  try {
-    const text = await UI.pasteFromClipboard();
-    UI.setInputValue('profile-public-key', text);
-  } catch (error) {
-    console.error('Paste failed:', error);
-  }
+  await handlePasteToInput('profile-public-key');
 }
 
 /**

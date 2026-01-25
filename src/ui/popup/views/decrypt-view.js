@@ -2,32 +2,28 @@
 import { getSharedKey } from '../../../core/profiles/profile-manager.js';
 import { decryptMessage } from '../../../core/crypto/aes.js';
 import { unwrapEncryptedMessage } from '../../../core/crypto/utils.js';
-import { local } from '../../../core/storage/storage-service.js';
 import * as UI from '../ui-helpers.js';
+import { ERROR_DECRYPTION_FAILED } from '../../../shared/constants.js';
 import {
-  ERROR_SELECT_PROFILE,
-  ERROR_DECRYPTION_FAILED
-} from '../../../shared/constants.js';
+  validateProfileSelection,
+  prepareView,
+  handleOperationSuccess,
+  handleOperationFailure,
+  handlePasteToInput
+} from './view-helpers.js';
 
 /**
  * Handle message decryption
  */
 export async function handleDecrypt(vault) {
-  const profileName = UI.getInputValue('decrypt-profile-select');
+  prepareView('decrypt-error', 'decrypted-output');
+  
+  const profileName = validateProfileSelection('decrypt-profile-select', 'decrypt-error');
+  if (!profileName) return false;
+  
   const encryptedText = UI.getInputValue('encrypted-input');
-  
-  UI.clearError('decrypt-error');
-  UI.clearInput('decrypted-output');
-  
-  // Validation
-  if (!profileName) {
-    UI.showError('decrypt-error', ERROR_SELECT_PROFILE);
-    return false;
-  }
-  
   if (!encryptedText) {
-    UI.showError('decrypt-error', ERROR_DECRYPTION_FAILED);
-    return false;
+    return handleOperationFailure('decrypt-error', ERROR_DECRYPTION_FAILED);
   }
   
   try {
@@ -36,15 +32,9 @@ export async function handleDecrypt(vault) {
     const decrypted = await decryptMessage(sharedKey, unwrapped);
     
     UI.setInputValue('decrypted-output', decrypted);
-    UI.clearInput('encrypted-input');
-    
-    // Save last used profile
-    await local.set('lastUsedProfile', profileName);
-    
-    return true;
+    return await handleOperationSuccess('encrypted-input', profileName);
   } catch (error) {
-    UI.showError('decrypt-error', ERROR_DECRYPTION_FAILED);
-    return false;
+    return handleOperationFailure('decrypt-error', ERROR_DECRYPTION_FAILED);
   }
 }
 
@@ -52,10 +42,5 @@ export async function handleDecrypt(vault) {
  * Handle encrypted message paste
  */
 export async function handlePasteEncrypted() {
-  try {
-    const text = await UI.pasteFromClipboard();
-    UI.setInputValue('encrypted-input', text);
-  } catch (error) {
-    console.error('Paste failed:', error);
-  }
+  await handlePasteToInput('encrypted-input');
 }

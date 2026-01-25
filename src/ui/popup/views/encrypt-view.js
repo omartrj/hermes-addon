@@ -2,32 +2,27 @@
 import { getSharedKey } from '../../../core/profiles/profile-manager.js';
 import { encryptMessage } from '../../../core/crypto/aes.js';
 import { wrapEncryptedMessage } from '../../../core/crypto/utils.js';
-import { local } from '../../../core/storage/storage-service.js';
 import * as UI from '../ui-helpers.js';
+import { ERROR_MESSAGE_REQUIRED, ERROR_ENCRYPTION_FAILED } from '../../../shared/constants.js';
 import {
-  ERROR_SELECT_PROFILE,
-  ERROR_MESSAGE_REQUIRED
-} from '../../../shared/constants.js';
+  validateProfileSelection,
+  prepareView,
+  handleOperationSuccess,
+  handleOperationFailure
+} from './view-helpers.js';
 
 /**
  * Handle message encryption
  */
 export async function handleEncrypt(vault) {
-  const profileName = UI.getInputValue('encrypt-profile-select');
+  prepareView('encrypt-error', 'encrypted-output');
+  
+  const profileName = validateProfileSelection('encrypt-profile-select', 'encrypt-error');
+  if (!profileName) return false;
+  
   const plaintext = UI.getInputValue('plaintext-input');
-  
-  UI.clearError('encrypt-error');
-  UI.clearInput('encrypted-output');
-  
-  // Validation
-  if (!profileName) {
-    UI.showError('encrypt-error', ERROR_SELECT_PROFILE);
-    return false;
-  }
-  
   if (!plaintext) {
-    UI.showError('encrypt-error', ERROR_MESSAGE_REQUIRED);
-    return false;
+    return handleOperationFailure('encrypt-error', ERROR_MESSAGE_REQUIRED);
   }
   
   try {
@@ -36,15 +31,9 @@ export async function handleEncrypt(vault) {
     const wrapped = wrapEncryptedMessage(encrypted);
     
     UI.setInputValue('encrypted-output', wrapped);
-    UI.clearInput('plaintext-input');
-    
-    // Save last used profile
-    await local.set('lastUsedProfile', profileName);
-    
-    return true;
+    return await handleOperationSuccess('plaintext-input', profileName);
   } catch (error) {
-    UI.showError('encrypt-error', 'Encryption failed');
-    return false;
+    return handleOperationFailure('encrypt-error', ERROR_ENCRYPTION_FAILED);
   }
 }
 

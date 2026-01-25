@@ -46,18 +46,23 @@ export const PROMPT_DELETE_CONFIRMATION = 'Type DELETE in capital letters to con
 // Error messages
 export const ERROR_PASSWORDS_DONT_MATCH = 'Passwords do not match';
 export const ERROR_PASSWORD_REQUIRED = 'Master password is required';
+export const ERROR_PASSWORD_TOO_SHORT = `Password must be at least ${MIN_MASTER_PASSWORD_LENGTH} characters`;
 export const ERROR_INCORRECT_PASSWORD = 'Incorrect password';
+export const ERROR_VAULT_CREATION_FAILED = 'Failed to create vault';
 export const ERROR_PROFILE_NAME_REQUIRED = 'Profile name is required';
 export const ERROR_PUBLIC_KEY_REQUIRED = 'Public key is required';
 export const ERROR_INVALID_PUBLIC_KEY = 'Invalid public key format';
 export const ERROR_PROFILE_EXISTS = 'Profile already exists';
+export const ERROR_PROFILE_ADD_FAILED = 'Failed to add profile';
 export const ERROR_SELECT_PROFILE = 'Please select a profile';
 export const ERROR_MESSAGE_REQUIRED = 'Message is required';
+export const ERROR_ENCRYPTION_FAILED = 'Encryption failed';
 export const ERROR_DECRYPTION_FAILED = 'Decryption failed. Invalid message or wrong key';
 export const ERROR_NO_VAULT = 'No vault to export';
 export const ERROR_EXPORT_FAILED = 'Export failed';
 export const ERROR_IMPORT_FAILED = 'Import failed: Invalid file';
 export const ERROR_INVALID_VAULT_FORMAT = 'Invalid vault file format';
+export const ERROR_INVALID_MESSAGE_FORMAT = 'Invalid message format';
 
 // Success messages
 export const SUCCESS_VAULT_CREATED = 'Vault created successfully!';

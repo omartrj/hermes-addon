@@ -6,7 +6,9 @@ import {
   MIN_MASTER_PASSWORD_LENGTH,
   ERROR_PASSWORDS_DONT_MATCH,
   ERROR_PASSWORD_REQUIRED,
+  ERROR_PASSWORD_TOO_SHORT,
   ERROR_INCORRECT_PASSWORD,
+  ERROR_VAULT_CREATION_FAILED,
   CONFIRM_RESET_VAULT
 } from '../../../shared/constants.js';
 
@@ -38,7 +40,7 @@ export async function handleCreateVault() {
   UI.clearError('create-error');
   
   if (!password || password.length < MIN_MASTER_PASSWORD_LENGTH) {
-    UI.showError('create-error', `Password must be at least ${MIN_MASTER_PASSWORD_LENGTH} characters`);
+    UI.showError('create-error', ERROR_PASSWORD_TOO_SHORT);
     return null;
   }
   
@@ -53,7 +55,7 @@ export async function handleCreateVault() {
     
     return { vault: vaultData, password };
   } catch (error) {
-    UI.showError('create-error', 'Failed to create vault');
+    UI.showError('create-error', ERROR_VAULT_CREATION_FAILED);
     return null;
   }
 }

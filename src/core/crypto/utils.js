@@ -1,5 +1,5 @@
 // Cryptographic utilities for conversions and formatting
-import { MESSAGE_BEGIN_MARKER, MESSAGE_END_MARKER } from '../../shared/constants.js';
+import { MESSAGE_BEGIN_MARKER, MESSAGE_END_MARKER, ERROR_INVALID_MESSAGE_FORMAT } from '../../shared/constants.js';
 
 /**
  * Convert ArrayBuffer to Base64 string
@@ -41,7 +41,7 @@ export function unwrapEncryptedMessage(wrappedMessage) {
   );
   const match = wrappedMessage.match(pattern);
   if (!match) {
-    throw new Error('Invalid message format');
+    throw new Error(ERROR_INVALID_MESSAGE_FORMAT);
   }
   return match[1].replace(/\s+/g, '');
 }
