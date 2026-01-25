@@ -4,6 +4,10 @@ import { encryptMessage } from '../../../core/crypto/aes.js';
 import { wrapEncryptedMessage } from '../../../core/crypto/utils.js';
 import { local } from '../../../core/storage/storage-service.js';
 import * as UI from '../ui-helpers.js';
+import {
+  ERROR_SELECT_PROFILE,
+  ERROR_MESSAGE_REQUIRED
+} from '../../../shared/constants.js';
 
 /**
  * Handle message encryption
@@ -17,12 +21,12 @@ export async function handleEncrypt(vault) {
   
   // Validation
   if (!profileName) {
-    UI.showError('encrypt-error', 'Please select a profile');
+    UI.showError('encrypt-error', ERROR_SELECT_PROFILE);
     return false;
   }
   
   if (!plaintext) {
-    UI.showError('encrypt-error', 'Please enter a message');
+    UI.showError('encrypt-error', ERROR_MESSAGE_REQUIRED);
     return false;
   }
   

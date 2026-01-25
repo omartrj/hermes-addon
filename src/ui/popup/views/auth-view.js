@@ -2,6 +2,13 @@
 import { createNewVault, unlockVault } from '../../../core/vault/vault-manager.js';
 import * as SessionManager from '../../../core/storage/session-manager.js';
 import * as UI from '../ui-helpers.js';
+import {
+  MIN_MASTER_PASSWORD_LENGTH,
+  ERROR_PASSWORDS_DONT_MATCH,
+  ERROR_PASSWORD_REQUIRED,
+  ERROR_INCORRECT_PASSWORD,
+  CONFIRM_RESET_VAULT
+} from '../../../shared/constants.js';
 
 /**
  * Show vault creation view
@@ -30,13 +37,13 @@ export async function handleCreateVault() {
   
   UI.clearError('create-error');
   
-  if (!password || password.length < 8) {
-    UI.showError('create-error', 'Password must be at least 8 characters');
+  if (!password || password.length < MIN_MASTER_PASSWORD_LENGTH) {
+    UI.showError('create-error', `Password must be at least ${MIN_MASTER_PASSWORD_LENGTH} characters`);
     return null;
   }
   
   if (password !== confirm) {
-    UI.showError('create-error', 'Passwords do not match');
+    UI.showError('create-error', ERROR_PASSWORDS_DONT_MATCH);
     return null;
   }
   
@@ -60,7 +67,7 @@ export async function handleUnlockVault() {
   UI.clearError('unlock-error');
   
   if (!password) {
-    UI.showError('unlock-error', 'Please enter password');
+    UI.showError('unlock-error', ERROR_PASSWORD_REQUIRED);
     return null;
   }
   
@@ -73,7 +80,7 @@ export async function handleUnlockVault() {
     
     return { vault: vaultData, password };
   } catch (error) {
-    UI.showError('unlock-error', 'Incorrect password');
+    UI.showError('unlock-error', ERROR_INCORRECT_PASSWORD);
     return null;
   }
 }
@@ -82,7 +89,7 @@ export async function handleUnlockVault() {
  * Handle vault reset
  */
 export async function handleResetVault() {
-  if (UI.confirmAction('This will delete all your data. Are you sure?')) {
+  if (UI.confirmAction(CONFIRM_RESET_VAULT)) {
     await SessionManager.deleteAllData();
     UI.clearInputs(['unlock-password']);
     showCreateVaultView();

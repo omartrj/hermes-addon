@@ -4,6 +4,10 @@ import { decryptMessage } from '../../../core/crypto/aes.js';
 import { unwrapEncryptedMessage } from '../../../core/crypto/utils.js';
 import { local } from '../../../core/storage/storage-service.js';
 import * as UI from '../ui-helpers.js';
+import {
+  ERROR_SELECT_PROFILE,
+  ERROR_DECRYPTION_FAILED
+} from '../../../shared/constants.js';
 
 /**
  * Handle message decryption
@@ -17,12 +21,12 @@ export async function handleDecrypt(vault) {
   
   // Validation
   if (!profileName) {
-    UI.showError('decrypt-error', 'Please select a profile');
+    UI.showError('decrypt-error', ERROR_SELECT_PROFILE);
     return false;
   }
   
   if (!encryptedText) {
-    UI.showError('decrypt-error', 'Please enter encrypted message');
+    UI.showError('decrypt-error', ERROR_DECRYPTION_FAILED);
     return false;
   }
   
@@ -39,7 +43,7 @@ export async function handleDecrypt(vault) {
     
     return true;
   } catch (error) {
-    UI.showError('decrypt-error', 'Decryption failed - invalid format or wrong profile');
+    UI.showError('decrypt-error', ERROR_DECRYPTION_FAILED);
     return false;
   }
 }

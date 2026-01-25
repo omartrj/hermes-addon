@@ -17,6 +17,9 @@ export const ECDH_CURVE = 'P-256';
 // Salt length for PBKDF2
 export const SALT_LENGTH = 16;
 
+// Minimum master password length
+export const MIN_MASTER_PASSWORD_LENGTH = 8;
+
 // Encrypted message markers
 export const MESSAGE_BEGIN_MARKER = '---BEGIN ENCRYPTED MESSAGE---';
 export const MESSAGE_END_MARKER = '---END ENCRYPTED MESSAGE---';

@@ -3,6 +3,11 @@ import { getCompactPublicKey } from '../../../core/crypto/ecdh.js';
 import { calculateSharedSecret, addProfile, deleteProfile, getProfileNames } from '../../../core/profiles/profile-manager.js';
 import { local } from '../../../core/storage/storage-service.js';
 import * as UI from '../ui-helpers.js';
+import {
+  ERROR_PROFILE_NAME_REQUIRED,
+  ERROR_PUBLIC_KEY_REQUIRED,
+  CONFIRM_DELETE_PROFILE
+} from '../../../shared/constants.js';
 
 /**
  * Set and display user's public key
@@ -101,8 +106,13 @@ export async function handleAddProfile(vault) {
   
   UI.clearError('profile-error');
   
-  if (!name || !publicKey) {
-    UI.showError('profile-error', 'Please fill all fields');
+  if (!name) {
+    UI.showError('profile-error', ERROR_PROFILE_NAME_REQUIRED);
+    return null;
+  }
+  
+  if (!publicKey) {
+    UI.showError('profile-error', ERROR_PUBLIC_KEY_REQUIRED);
     return null;
   }
   
@@ -122,7 +132,7 @@ export async function handleAddProfile(vault) {
  * Handle profile deletion
  */
 export function handleDeleteProfile(vault, profileName) {
-  if (UI.confirmAction(`Delete profile "${profileName}"?`)) {
+  if (UI.confirmAction(CONFIRM_DELETE_PROFILE.replace('this profile', `"${profileName}"`))) {
     return deleteProfile(vault.profiles, profileName);
   }
   return null;

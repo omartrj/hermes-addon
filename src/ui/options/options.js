@@ -1,7 +1,22 @@
 // Settings page management
 import * as SessionManager from '../../core/storage/session-manager.js';
 import { local } from '../../core/storage/storage-service.js';
-import { STATUS_MESSAGE_DURATION } from '../../shared/constants.js';
+import {
+  STATUS_MESSAGE_DURATION,
+  SUCCESS_SETTINGS_SAVED,
+  SUCCESS_VAULT_EXPORTED,
+  ERROR_NO_VAULT,
+  ERROR_EXPORT_FAILED,
+  ERROR_INVALID_VAULT_FORMAT,
+  ERROR_IMPORT_FAILED,
+  CONFIRM_IMPORT_VAULT,
+  CONFIRM_NUKE_DATA,
+  PROMPT_DELETE_CONFIRMATION,
+  INFO_IMPORT_CANCELLED,
+  INFO_DELETE_CANCELLED,
+  SUCCESS_VAULT_IMPORTED,
+  SUCCESS_DATA_DELETED
+} from '../../shared/constants.js';
 
 /**
  * Load saved settings
@@ -17,7 +32,7 @@ async function loadSettings() {
 async function saveSettings() {
   const authMode = document.querySelector('input[name="auth-mode"]:checked').value;
   await SessionManager.setAuthMode(authMode);
-  showStatus('Settings saved!');
+  showStatus(SUCCESS_SETTINGS_SAVED);
 }
 
 /**
@@ -40,7 +55,7 @@ async function exportVault() {
     const vault = await SessionManager.getEncryptedVault();
     
     if (!vault) {
-      showStatus('No vault to export');
+      showStatus(ERROR_NO_VAULT);
       return;
     }
     
@@ -54,9 +69,9 @@ async function exportVault() {
     link.click();
     
     URL.revokeObjectURL(url);
-    showStatus('Vault exported successfully');
+    showStatus(SUCCESS_VAULT_EXPORTED);
   } catch (error) {
-    showStatus('Export failed');
+    showStatus(ERROR_EXPORT_FAILED);
   }
 }
 
@@ -72,26 +87,23 @@ async function importVault(event) {
     const vault = JSON.parse(text);
     
     if (!vault || !vault.data || !vault.iv || !vault.salt) {
-      showStatus('Invalid vault file');
+      showStatus(ERROR_INVALID_VAULT_FORMAT);
       return;
     }
     
-    const confirmation = confirm(
-      'Importing a vault will replace your current vault.\n\n' +
-      'Are you sure you want to continue?'
-    );
+    const confirmation = confirm(CONFIRM_IMPORT_VAULT);
     
     if (!confirmation) {
-      showStatus('Import cancelled');
+      showStatus(INFO_IMPORT_CANCELLED);
       return;
     }
     
     await local.set('vault', vault);
     await SessionManager.clearSession();
     
-    showStatus('Vault imported successfully! Please reload the extension.');
+    showStatus(SUCCESS_VAULT_IMPORTED);
   } catch (error) {
-    showStatus('Import failed: Invalid file');
+    showStatus(ERROR_IMPORT_FAILED);
   } finally {
     event.target.value = '';
   }
@@ -108,32 +120,24 @@ function handleImportClick() {
  * Delete all data (nuke)
  */
 async function nukeAllData() {
-  const confirmation = confirm(
-    'WARNING: This will permanently delete ALL your data including:\n\n' +
-    '- Master password vault\n' +
-    '- All encryption keys\n' +
-    '- All profiles\n' +
-    '- Session data\n\n' +
-    'This action CANNOT be undone.\n' +
-    'Are you sure you want to proceed?'
-  );
+  const confirmation = confirm(CONFIRM_NUKE_DATA);
   
   if (!confirmation) {
     return;
   }
   
-  const typed = prompt('Type DELETE in capital letters to confirm:');
+  const typed = prompt(PROMPT_DELETE_CONFIRMATION);
   
   if (typed !== 'DELETE') {
-    showStatus('Deletion cancelled');
+    showStatus(INFO_DELETE_CANCELLED);
     return;
   }
   
   try {
     await SessionManager.deleteAllData();
-    showStatus('All data deleted. Please restart the extension.');
+    showStatus(SUCCESS_DATA_DELETED);
   } catch (error) {
-    showStatus('Failed to delete data');
+    showStatus(ERROR_EXPORT_FAILED);
   }
 }
 
